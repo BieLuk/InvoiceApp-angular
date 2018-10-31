@@ -8,7 +8,7 @@ import { FormsModule} from '@angular/forms';
 import { HeroDetailComponent } from './component/hero-detail/hero-detail.component';
 import { MessagesComponent } from './component/messages/messages.component';
 import { DashboardComponent } from './component/dashboard/dashboard.component';
-import { HeaderComponent } from './component/header/header.component';
+import { NavbarComponent } from './component/navbar/navbar.component';
 import { AppBootstrapModule } from './app-bootstrap.module';
 
 @NgModule({
@@ -18,7 +18,7 @@ import { AppBootstrapModule } from './app-bootstrap.module';
     HeroDetailComponent,
     MessagesComponent,
     DashboardComponent,
-    HeaderComponent
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
