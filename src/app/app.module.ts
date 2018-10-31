@@ -10,6 +10,9 @@ import { MessagesComponent } from './component/messages/messages.component';
 import { DashboardComponent } from './component/dashboard/dashboard.component';
 import { NavbarComponent } from './component/navbar/navbar.component';
 import { AppBootstrapModule } from './app-bootstrap.module';
+import { AppConstantsModule } from './app-constants-module';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { FooterComponent } from './component/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -18,13 +21,16 @@ import { AppBootstrapModule } from './app-bootstrap.module';
     HeroDetailComponent,
     MessagesComponent,
     DashboardComponent,
-    NavbarComponent
+    NavbarComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
+    AppConstantsModule,
     AppBootstrapModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    FontAwesomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

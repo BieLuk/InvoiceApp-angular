@@ -1,1 +1,8 @@
 @import '~bootstrap/dist/css/bootstrap.min.css';
+
+body {
+  background-color: #fcfcfc;
+}
+.container {
+  width: 65%;
+}

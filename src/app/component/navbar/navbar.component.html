@@ -4,14 +4,15 @@
         <a class="navbar-brand" routerLink="/dashboard">Fakturowanie24</a>
       </div>
       <ul class="nav navbar-nav">
-        <li><a routerLink="/dashboard">Panel główny</a></li>
-        <li><a routerLink="/heroes">Faktury</a></li>
-        <li><a routerLink="#">Klienci</a></li>
-        <li><a routerLink="#">Profil</a></li>
+        <li routerLinkActive="active"><a routerLink="/dashboard">Panel główny</a></li>
+        <li routerLinkActive="active"><a routerLink="/heroes">Faktury</a></li>
+        <li routerLinkActive="active"><a routerLink="#">Klienci</a></li>
+
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <!--<li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>-->
-        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+        <li><a routerLink="#">Użytkownik</a></li>
+        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Wyloguj</a></li>
       </ul>
     </div>
   </nav>

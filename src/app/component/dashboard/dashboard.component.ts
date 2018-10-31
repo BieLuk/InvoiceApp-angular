@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Hero } from '../../model/hero';
 import { HeroService } from '../../service/hero.service';
+// import { faPhone } from '@fortawesome/free-solid-svg-icons';
+
 
 @Component({
   selector: 'app-dashboard',
@@ -8,9 +10,12 @@ import { HeroService } from '../../service/hero.service';
   styleUrls: [ './dashboard.component.css' ]
 })
 export class DashboardComponent implements OnInit {
+  // faPhone = faPhone;
+
+
   heroes: Hero[] = [];
 
-  constructor(private heroService: HeroService) { }
+  constructor(private heroService: HeroService) {}
 
   ngOnInit() {
     this.getHeroes();
