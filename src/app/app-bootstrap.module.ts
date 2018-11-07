@@ -12,7 +12,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     BsDropdownModule.forRoot(),
     TooltipModule.forRoot(),
     ModalModule.forRoot(),
-    NgbModule
+    NgbModule,
   ],
   exports: [BsDropdownModule, TooltipModule, ModalModule]
 })
