@@ -22,7 +22,6 @@ import {RouterModule} from '@angular/router';
     AppRoutingModule,
     FormsModule,
 
-    DataTablesModule,
     NgbModule,
     SharedModule,
     UserModule,
