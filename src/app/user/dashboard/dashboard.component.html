@@ -1,26 +1,40 @@
 <div>
   <div class="row pt-2">
-    <div class="col-4">
-      <div class="row">
-        <div class="col-12 d-flex justify-content-center">
+    <div class="col-3 pl-4">
+      <div class="flex-row">
+        <div class="col-12 justify-content-center">
           <div class="card add-panel">
-            <div class="card-header"><h4>Zapisane szablony:</h4></div>
+            <div class="card-header"><h4>Szybki dostęp:</h4></div>
             <div class="card-body ">
-              test test
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item list-group-item">
+                  <div class="action-icon">
+                    <a class="" routerLink="#"><i class="fas fa-file-alt fa-2x"></i> Dodaj fakturę</a>
+                  </div>
+                </li>
+                <li class="list-group-item list-group-item">
+                  <div class="action-icon">
+                    <a class="" routerLink="#"><i class="fas fa-user-tie fa-2x"></i> Dodaj klienta</a>
+                  </div>
+                </li>
+                <li class="list-group-item list-group-item">
+                    <a routerLink="#"><i class="fas fa-file-invoice fa-2x"></i> Dodaj szablon faktury</a>
+                </li>
+
+              </ul>
+
+
             </div>
           </div>
 
         </div>
       </div>
 
-
-
-
-
     </div>
 
 
-    <div class="col-7">
+
+    <div class="col-9 pr-5">
       <div class="flex-row mb-3">
         <div class="card">
           <div class="card-header"><h4>Zapisane szablony:</h4></div>
@@ -34,8 +48,21 @@
         <div class="card">
           <div class="card-header"><h4>Ostatnie faktury:</h4></div>
           <div class="card-body">
-            test test test test <br>
-            sdad
+            <!--<table datatable [dtOptions]="dtOptions" class="row-border hover"></table>-->
+            <table>
+              <thead>
+                <tr>
+                  <th>Numer</th>
+                  <th>Nazwa klienta</th>
+                  <th>Data wystawienia</th>
+                  <th>Rodzaj dokumentu</th>
+                  <th>Wartość brutto</th>
+                </tr>
+              </thead>
+              <tbody>
+
+              </tbody>
+            </table>
           </div>
         </div>
       </div>

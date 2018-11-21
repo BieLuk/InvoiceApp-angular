@@ -1,0 +1,31 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light border mb-4">
+  <a class="navbar-brand" routerLink="/user">Fakturowanie24</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <div class="navbar-nav mr-auto">
+
+      <button type="button" class="nav-link nav-item btn btn-light mr-1" routerLink="/user/dashboard" routerLinkActive="active">Panel główny <span class="sr-only">(current)</span></button>
+      <button type="button" class="nav-item nav-link btn btn-light mr-1" routerLink="/user/heroes" routerLinkActive="active">Faktury</button>
+      <button type="button" class="nav-item nav-link btn btn-light mr-1" routerLink="#" routerLinkActive="active">Klienci</button>
+    </div>
+    <div class="navbar-nav">
+      <!--<a class="nav-item nav-link" routerLink="/user/profile" routerLinkActive="active"><i class="fas fa-user"></i> Użytkownik</a>-->
+      <div class="dropdown btn">
+        <button type="button" class="nav-link nav-item btn btn-light mr-1 dropdown-toggle" data-toggle="dropdown">
+          <i class="fas fa-user"></i> Użytkownik
+        </button>
+        <div class="dropdown-menu">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item" routerLink="/user/settings/company"><span class="settings-item">Dane firmy</span></li>
+            <li class="list-group-item" routerLink="/user/settings/profile"><span class="settings-item">Ustawienia konta</span></li>
+          </ul>
+        </div>
+      </div>
+      <button type="button" class="nav-item nav-link btn btn-light mr-1" routerLink="#"><i class="fas fa-sign-out-alt"></i> Wyloguj</button>
+    </div>
+  </div>
+</nav>
+

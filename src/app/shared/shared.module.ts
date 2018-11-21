@@ -1,7 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {NavbarComponent} from '../component/navbar/navbar.component';
-import {LoginComponent} from '../component/login/login.component';
+import {NavbarComponent} from './component/navbar/navbar.component';
+import {LoginComponent} from './component/login/login.component';
+import {RouterModule} from '@angular/router';
+import {sharedModuleRoutes} from './shared-routings';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -13,7 +16,10 @@ import {LoginComponent} from '../component/login/login.component';
     LoginComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    HttpClientModule,
+    RouterModule.forChild(sharedModuleRoutes)
+
   ]
 })
 export class SharedModule { }
