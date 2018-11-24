@@ -2,7 +2,7 @@ import {Routes} from '@angular/router';
 import {UserRootComponent} from './user-root.component';
 import {DashboardComponent} from './dashboard/dashboard.component';
 import {HeroesComponent} from './heroes/heroes.component';
-import {UserSettingsMainComponent} from './user-settings-main/user-settings-main.component';
+import {UserSettingsComponent} from './user-settings/user-settings.component';
 
 export const userModuleRoutes: Routes = [
   {
@@ -21,8 +21,8 @@ export const userModuleRoutes: Routes = [
         pathMatch: 'full'
       },
       {
-        path: 'profile',
-        component: UserSettingsMainComponent,
+        path: 'settings',
+        component: UserSettingsComponent,
         pathMatch: 'full'
       }
     ]

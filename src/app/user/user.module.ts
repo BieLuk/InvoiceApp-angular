@@ -6,25 +6,26 @@ import { UserRootComponent } from './user-root.component';
 import {RouterModule} from '@angular/router';
 import {userModuleRoutes} from './user-routings';
 import {DataTablesModule} from 'angular-datatables';
-import { UserSettingsMainComponent } from './user-settings-main/user-settings-main.component';
-import { UserSettingsCompanyComponent } from './user-settings-company/user-settings-company.component';
+import { UserSettingsComponent } from './user-settings/user-settings.component';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {FormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
     DashboardComponent,
     HeroesComponent,
     UserRootComponent,
-    UserSettingsMainComponent,
-    UserSettingsCompanyComponent
+    UserSettingsComponent
   ],
   exports: [
     DashboardComponent,
-    UserSettingsMainComponent,
     HeroesComponent
   ],
   imports: [
     CommonModule,
     DataTablesModule,
+    NgbModule,
+    FormsModule,
     RouterModule.forChild(userModuleRoutes)
   ]
 })

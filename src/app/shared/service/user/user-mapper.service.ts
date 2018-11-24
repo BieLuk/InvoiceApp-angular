@@ -13,6 +13,7 @@ export class UserMapperService {
       id: dto.id,
       name: dto.name,
       email: dto.email,
+      password: dto.password,
       phone: dto.phone,
       street: dto.street,
       postcode: dto.postcode,
@@ -22,4 +23,23 @@ export class UserMapperService {
       active: dto.active
     };
   }
+
+  mapModelToDto(model: UserModel): UserDto {
+    return {
+      id: model.id,
+      name: model.name,
+      email: model.email,
+      password: model.password,
+      phone: model.phone,
+      street: model.street,
+      postcode: model.postcode,
+      city: model.city,
+      nip: model.nip,
+      regon: model.regon,
+      active: model.active
+    };
+  }
+
+
+
 }

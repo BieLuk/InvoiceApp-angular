@@ -1,0 +1,107 @@
+<div class="container">
+  <div class="flex-row">
+    <div class="flex-column d-flex">
+      <div class="d-flex justify-content-between">
+        <h3><i class="far fa-address-card "></i> Dane konta</h3>
+        <button type="button" class="btn btn-sm edit-btn" (click)="changeEditUserMode()">EDYTUJ</button>
+      </div>
+      <div class="card mb-4">
+        <div class="card-body">
+          <div *ngIf="userModel">
+            <div class="row">
+              <div class="col-5">
+                <p class="company-description-item">Adres e-mail</p>
+              </div>
+              <div class="col">
+                <input type="text" class="company-item" [(ngModel)]="userModel.email" [disabled]="!editUserMode">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-5">
+                <p class="company-description-item">Hasło</p>
+              </div>
+              <div class="col">
+                <input type="password" class="company-item" [(ngModel)]="userModel.password" [disabled]="!editUserMode">
+              </div>
+            </div>
+            <div class="row justify-content-center">
+              <button *ngIf="editUserMode" type="button" class="btn btn-info btn-lg btn-block btn-primary" style="width: 30%" (click)="saveChanges()">ZAPISZ</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="d-flex justify-content-between">
+        <h3><i class="far fa-building"></i> Dane Twojej firmy</h3>
+        <button type="button" class="btn btn-sm edit-btn" (click)="changeEditCompanyMode()">EDYTUJ</button>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <div *ngIf="userModel">
+            <div class="row">
+              <div class="col-5">
+                <p class="company-description-item">Nazwa firmy</p>
+              </div>
+              <div class="col">
+                <input type="text" class="company-item" [(ngModel)]="userModel.name" [disabled]="!editCompanyMode">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-5">
+                <p class="company-description-item">Ulica</p>
+              </div>
+              <div class="col">
+                <input type="text" class="company-item" [(ngModel)]="userModel.street" [disabled]="!editCompanyMode">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-5">
+                <p class="company-description-item">Kod pocztowy</p>
+              </div>
+              <div class="col">
+                <input type="text" class="company-item" [(ngModel)]="userModel.postcode" [disabled]="!editCompanyMode">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-5">
+                <p class="company-description-item">Miejscowość</p>
+              </div>
+              <div class="col">
+                <input type="text" class="company-item" [(ngModel)]="userModel.city" [disabled]="!editCompanyMode">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-5">
+                <p class="company-description-item">NIP</p>
+              </div>
+              <div class="col">
+                <input type="text" class="company-item" [(ngModel)]="userModel.nip" [disabled]="!editCompanyMode">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-5">
+                <p class="company-description-item">REGON</p>
+              </div>
+              <div class="col">
+                <input type="text" class="company-item" [(ngModel)]="userModel.regon" [disabled]="!editCompanyMode">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-5">
+                <p class="company-description-item">Numer telefonu</p>
+              </div>
+              <div class="col">
+                <input type="text" class="company-item" [(ngModel)]="userModel.phone" [disabled]="!editCompanyMode">
+              </div>
+            </div>
+            <div class="row justify-content-center">
+              <button *ngIf="editCompanyMode" type="button" class="btn btn-info btn-lg btn-block btn-primary" style="width: 30%" (click)="saveChanges()">ZAPISZ</button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

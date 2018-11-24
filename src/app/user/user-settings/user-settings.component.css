@@ -1,0 +1,61 @@
+.company-description-item {
+  font-size: 13px;
+  color: #607d8b;
+  text-align: right;
+  margin-top: 9px;
+  margin-bottom: 29px;
+}
+
+.company-item {
+  font-size: 22px;
+}
+
+.edit-btn {
+  color: #039be5;
+  background-color: #FFFFFF;
+  position: relative;
+}
+
+.edit-btn:after{
+  content: '';
+  position: absolute;
+  width: 0; height: 4px;
+  display: block;
+  margin-top: 5px;
+  right: 0;
+  background: #039be5;
+  transition: width .3s ease;
+  -webkit-transition: width .3s ease;
+}
+
+.edit-btn:hover:after{
+  width: 100%;
+  left: 0;
+  background: #039be5;
+}
+
+.edit-btn:focus, .edit-btn:active{
+  outline: none;
+  box-shadow: none;
+}
+
+input:disabled {
+  border: none;
+  outline: none;
+  background-color: #FFFFFF;
+  width: 80%;
+}
+
+input:enabled:hover, input:enabled:focus {
+  background-color: #cae3f9;
+  border-radius: 10px;
+  padding-left: 8px;
+  font-size: 23px;
+  outline: none;
+}
+
+input:enabled {
+  border-color: #23bbff;
+  border-radius: 10px;
+  padding-left: 8px;
+}

@@ -16,6 +16,10 @@ export class UserApiService {
     return this.http.get<SingleResponse<UserDto>>(AppConstants.API_ENDPOINT + '/user', { params: { userId: userId.toString() }});
   }
 
+  updateUser(user: UserDto): Observable<SingleResponse<UserDto>> {
+    return this.http.put<SingleResponse<UserDto>>(AppConstants.API_ENDPOINT + '/user', user);
+  }
+
 
 
 }

@@ -18,10 +18,7 @@ import {RouterModule} from '@angular/router';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-
     NgbModule,
-    // NgModel,
-    // NgModule,
     SharedModule,
     UserModule,
     AdminModule,
