@@ -3,6 +3,7 @@ import {UserRootComponent} from './user-root.component';
 import {DashboardComponent} from './dashboard/dashboard.component';
 import {HeroesComponent} from './heroes/heroes.component';
 import {UserSettingsComponent} from './user-settings/user-settings.component';
+import {ClientsComponent} from './clients/clients.component';
 
 export const userModuleRoutes: Routes = [
   {
@@ -23,6 +24,11 @@ export const userModuleRoutes: Routes = [
       {
         path: 'settings',
         component: UserSettingsComponent,
+        pathMatch: 'full'
+      },
+      {
+        path: 'clients',
+        component: ClientsComponent,
         pathMatch: 'full'
       }
     ]

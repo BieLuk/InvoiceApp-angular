@@ -9,10 +9,12 @@ import {SharedModule} from './shared/shared.module';
 import {UserModule} from './user/user.module';
 import {AdminModule} from './admin/admin.module';
 import {RouterModule} from '@angular/router';
+import { ClientNewComponent } from './user/client-new/client-new.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    ClientNewComponent,
   ],
   imports: [
     BrowserModule,

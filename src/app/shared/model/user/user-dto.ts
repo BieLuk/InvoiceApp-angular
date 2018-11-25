@@ -12,3 +12,9 @@ export interface UserDto {
   regon: string;
   active: boolean;
 }
+
+export interface UserSimpleDto {
+  id: number;
+  name: string;
+  email: string;
+}

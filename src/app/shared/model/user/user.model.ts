@@ -10,5 +10,10 @@ export interface UserModel {
   nip: string;
   regon: string;
   active: boolean;
+}
 
+export interface UserSimpleModel {
+  id: number;
+  name: string;
+  email: string;
 }

@@ -1,0 +1,33 @@
+<div class="container">
+  <div class="flex-row">
+    <div class="flex-column d-flex">
+      <div class="d-flex justify-content-between">
+        <h3><i class="far fa-address-book "></i> Klienci</h3>
+        <button type="button" class="btn btn-sm new-client-btn" routerLink="/user/clients/new">DODAJ KLIENTA</button>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <div *ngIf="clients">
+            <table datatable [dtOptions]="dtOptions" class="row-border hover">
+              <thead>
+              <tr>
+                <th>Nazwa firmy</th>
+                <th>Miejscowość</th>
+                <th>NIP</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let client of clients">
+                <td>{{ client.name }}</td>
+                <td>{{ client.city }}</td>
+                <td>{{ client.nip }}</td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

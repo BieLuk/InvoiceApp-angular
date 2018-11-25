@@ -5,3 +5,24 @@
   font-family: 'Montserrat', sans-serif;
 }
 
+input:disabled {
+  border: none;
+  outline: none;
+  background-color: #FFFFFF;
+  width: 80%;
+}
+
+input:enabled:hover, input:enabled:focus {
+  background-color: #cae3f9;
+  border-radius: 10px;
+  padding-left: 8px;
+  font-size: 17px;
+  outline: none;
+}
+
+input:enabled {
+  border-color: #23bbff;
+  border-radius: 10px;
+  padding-left: 8px;
+}
+

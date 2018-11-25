@@ -1,22 +1,10 @@
-.company-description-item {
-  font-size: 13px;
-  color: #607d8b;
-  text-align: right;
-  margin-top: 9px;
-  margin-bottom: 29px;
-}
-
-.company-item {
-  font-size: 22px;
-}
-
-.edit-btn {
+.new-client-btn {
   color: #039be5;
   background-color: #FFFFFF;
   position: relative;
 }
 
-.edit-btn:after{
+.new-client-btn:after{
   content: '';
   position: absolute;
   width: 0; height: 4px;
@@ -28,17 +16,16 @@
   -webkit-transition: width .3s ease;
 }
 
-.edit-btn:hover:after{
+.new-client-btn:hover:after{
   width: 100%;
   left: 0;
   background: #039be5;
 }
 
-.edit-btn:focus, .edit-btn:active{
+.new-client-btn:focus, .edit-btn:active{
   outline: none;
   box-shadow: none;
 }
 
-input:enabled:hover, input:enabled:focus {
-  font-size: 23px;
-}
+
+

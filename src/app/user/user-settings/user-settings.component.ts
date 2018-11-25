@@ -29,8 +29,7 @@ export class UserSettingsComponent implements OnInit {
     this.userApiService.getUserDetailsById(5).pipe(
       map(response => response.data),
       map(userDto => this.userMapperSerivce.mapDtoToModel(userDto))
-    )
-      .subscribe(user => this.userModel = user);
+    ).subscribe(user => this.userModel = user);
   }
 
   changeEditUserMode() {
@@ -47,6 +46,7 @@ export class UserSettingsComponent implements OnInit {
       .subscribe(
         () => {
           this.editUserMode = false;
+          this.editCompanyMode = false;
           this.loadUserModel();
         }
       );
