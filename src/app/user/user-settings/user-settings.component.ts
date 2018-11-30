@@ -40,6 +40,7 @@ export class UserSettingsComponent implements OnInit {
   }
 
   // TODO rozdzielic zmiane hasla od reszty
+  // TODO rozdzielić zapisywanie danych do bazy na oddzielne moduły
 
   saveChanges() {
     this.userApiService.updateUser(this.userMapperSerivce.mapModelToDto(this.userModel))

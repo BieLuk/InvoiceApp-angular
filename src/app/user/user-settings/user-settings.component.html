@@ -10,22 +10,22 @@
           <div *ngIf="userModel">
             <div class="row">
               <div class="col-5">
-                <p class="company-description-item">Adres e-mail</p>
+                <p class="company-description-item"><label for="email">Adres e-mail</label></p>
               </div>
               <div class="col">
-                <input type="text" class="company-item" [(ngModel)]="userModel.email" [disabled]="!editUserMode">
+                <input id="email" type="text" class="company-item" [(ngModel)]="userModel.email" [disabled]="!editUserMode">
               </div>
             </div>
             <div class="row">
               <div class="col-5">
-                <p class="company-description-item">Hasło</p>
+                <p class="company-description-item"><label for="password">Hasło</label></p>
               </div>
               <div class="col">
-                <input type="password" class="company-item" [(ngModel)]="userModel.password" [disabled]="!editUserMode">
+                <input id="password" type="password" class="company-item" [(ngModel)]="userModel.password" [disabled]="!editUserMode">
               </div>
             </div>
             <div class="row justify-content-center">
-              <button *ngIf="editUserMode" type="button" class="btn btn-info btn-lg btn-block btn-primary" style="width: 30%" (click)="saveChanges()">ZAPISZ</button>
+              <button id="btn-save-user" *ngIf="editUserMode" type="button" class="btn btn-info btn-lg btn-block " style="width: 30%" (click)="saveChanges()">ZAPISZ</button>
             </div>
           </div>
         </div>
@@ -40,62 +40,62 @@
           <div *ngIf="userModel">
             <div class="row">
               <div class="col-5">
-                <p class="company-description-item">Nazwa firmy</p>
+                <p class="company-description-item"><label for="name">Nazwa firmy</label></p>
               </div>
               <div class="col">
-                <input type="text" class="company-item" [(ngModel)]="userModel.name" [disabled]="!editCompanyMode">
+                <input id="name" type="text" class="company-item" [(ngModel)]="userModel.name" [disabled]="!editCompanyMode">
               </div>
             </div>
             <div class="row">
               <div class="col-5">
-                <p class="company-description-item">Ulica</p>
+                <p class="company-description-item"><label for="street">Ulica</label></p>
               </div>
               <div class="col">
-                <input type="text" class="company-item" [(ngModel)]="userModel.street" [disabled]="!editCompanyMode">
+                <input id="street" type="text" class="company-item" [(ngModel)]="userModel.street" [disabled]="!editCompanyMode">
               </div>
             </div>
             <div class="row">
               <div class="col-5">
-                <p class="company-description-item">Kod pocztowy</p>
+                <p class="company-description-item"><label for="postcode">Kod pocztowy</label></p>
               </div>
               <div class="col">
-                <input type="text" class="company-item" [(ngModel)]="userModel.postcode" [disabled]="!editCompanyMode">
+                <input id="postcode" type="text" class="company-item" [(ngModel)]="userModel.postcode" [disabled]="!editCompanyMode">
               </div>
             </div>
             <div class="row">
               <div class="col-5">
-                <p class="company-description-item">Miejscowość</p>
+                <p class="company-description-item"><label for="city">Miejscowość</label></p>
               </div>
               <div class="col">
-                <input type="text" class="company-item" [(ngModel)]="userModel.city" [disabled]="!editCompanyMode">
+                <input id="city" type="text" class="company-item" [(ngModel)]="userModel.city" [disabled]="!editCompanyMode">
               </div>
             </div>
             <div class="row">
               <div class="col-5">
-                <p class="company-description-item">NIP</p>
+                <p class="company-description-item"><label for="nip">NIP</label></p>
               </div>
               <div class="col">
-                <input type="text" class="company-item" [(ngModel)]="userModel.nip" [disabled]="!editCompanyMode">
+                <input id="nip" type="text" class="company-item" [(ngModel)]="userModel.nip" [disabled]="!editCompanyMode">
               </div>
             </div>
             <div class="row">
               <div class="col-5">
-                <p class="company-description-item">REGON</p>
+                <p class="company-description-item"><label for="regon">REGON</label></p>
               </div>
               <div class="col">
-                <input type="text" class="company-item" [(ngModel)]="userModel.regon" [disabled]="!editCompanyMode">
+                <input id="regon" type="text" class="company-item" [(ngModel)]="userModel.regon" [disabled]="!editCompanyMode">
               </div>
             </div>
             <div class="row">
               <div class="col-5">
-                <p class="company-description-item">Numer telefonu</p>
+                <p class="company-description-item"><label for="phone">Numer telefonu</label></p>
               </div>
               <div class="col">
-                <input type="text" class="company-item" [(ngModel)]="userModel.phone" [disabled]="!editCompanyMode">
+                <input id="phone" type="text" class="company-item" [(ngModel)]="userModel.phone" [disabled]="!editCompanyMode">
               </div>
             </div>
             <div class="row justify-content-center">
-              <button *ngIf="editCompanyMode" type="button" class="btn btn-info btn-lg btn-block btn-primary" style="width: 30%" (click)="saveChanges()">ZAPISZ</button>
+              <button id="btn-save-company" *ngIf="editCompanyMode" type="button" class="btn btn-info btn-lg btn-block" style="width: 30%" (click)="saveChanges()">ZAPISZ</button>
             </div>
 
           </div>

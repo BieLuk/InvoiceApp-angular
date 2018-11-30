@@ -3,6 +3,7 @@ import {DashboardComponent} from '../user/dashboard/dashboard.component';
 import {UserSettingsComponent} from '../user/user-settings/user-settings.component';
 import {ClientsComponent} from '../user/clients/clients.component';
 import {HeroesComponent} from '../user/heroes/heroes.component';
+import {ClientNewComponent} from '../user/client-new/client-new.component';
 
 export const sharedModuleRoutes: Routes = [
   {
@@ -19,8 +20,7 @@ export const sharedModuleRoutes: Routes = [
     path: 'user/settings',
     component: UserSettingsComponent,
     pathMatch: 'full'
-  }
-  ,
+  },
   {
     path: 'user/invoices',
     component: HeroesComponent,

@@ -8,9 +8,9 @@ import {userModuleRoutes} from './user-routings';
 import {DataTablesModule} from 'angular-datatables';
 import { UserSettingsComponent } from './user-settings/user-settings.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { ClientsComponent } from './clients/clients.component';
-import {MatTableModule} from '@angular/material';
+import {ClientNewComponent} from './client-new/client-new.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +18,8 @@ import {MatTableModule} from '@angular/material';
     HeroesComponent,
     UserRootComponent,
     UserSettingsComponent,
-    ClientsComponent
+    ClientsComponent,
+    ClientNewComponent
   ],
   exports: [
     DashboardComponent,
@@ -29,7 +30,7 @@ import {MatTableModule} from '@angular/material';
     DataTablesModule,
     NgbModule,
     FormsModule,
-    MatTableModule,
+    ReactiveFormsModule,
     RouterModule.forChild(userModuleRoutes)
   ]
 })

@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 import {AppRoutingModule, routes} from './app-routing.module';
 import { AppComponent } from './app.component';
-import {FormsModule, NgModel} from '@angular/forms';
+import {FormsModule, NgModel, ReactiveFormsModule} from '@angular/forms';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {SharedModule} from './shared/shared.module';
 import {UserModule} from './user/user.module';
@@ -14,7 +14,6 @@ import { ClientNewComponent } from './user/client-new/client-new.component';
 @NgModule({
   declarations: [
     AppComponent,
-    ClientNewComponent,
   ],
   imports: [
     BrowserModule,

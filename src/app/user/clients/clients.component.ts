@@ -25,6 +25,9 @@ export class ClientsComponent implements OnInit {
     this.loadClients();
 
     this.dtOptions = {
+      // columnDefs: [
+      //   { width: '33%', targets: 0}
+      // ],
       language: {
         url: '//cdn.datatables.net/plug-ins/1.10.19/i18n/Polish.json'
       }
