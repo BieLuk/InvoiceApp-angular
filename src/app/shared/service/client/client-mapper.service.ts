@@ -23,22 +23,22 @@ export class ClientMapperService {
       user: dto.user
     };
   }
-  //
-  // mapModelToDto(model: ClientModel): ClientDto {
-  //   return {
-  //     id: model.id,
-  //     name: model.name,
-  //     email: model.email,
-  //     website: model.website,
-  //     phone: model.phone,
-  //     street: model.street,
-  //     postcode: model.postcode,
-  //     city: model.city,
-  //     nip: model.nip,
-  //     comment: model.comment,
-  //     user: model.user
-  //   };
-  // }
+
+  mapModelToDto(model: ClientModel): ClientDto {
+    return {
+      id: model.id,
+      name: model.name,
+      email: model.email,
+      website: model.website,
+      phone: model.phone,
+      street: model.street,
+      postcode: model.postcode,
+      city: model.city,
+      nip: model.nip,
+      comment: model.comment,
+      user: model.user
+    };
+  }
 
 
 

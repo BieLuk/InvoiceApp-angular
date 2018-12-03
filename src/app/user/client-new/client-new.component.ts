@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import {InvoiceDataApiService} from '../../shared/service/invoice-data/invoice-data-api.service';
 import {InvoiceDataMapperService} from '../../shared/service/invoice-data/invoice-data-mapper.service';
 import {ClientModel} from '../../shared/model/client/client.model';
-import {InvoiceDataModel} from '../../shared/model/invoice-data/invoice-data.model';
 import {ActivatedRoute} from '@angular/router';
 import {map} from 'rxjs/operators';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {ClientApiService} from '../../shared/service/client/client-api.service';
+import {ClientMapperService} from '../../shared/service/client/client-mapper.service';
 
 @Component({
   selector: 'app-client-new',
@@ -15,23 +15,11 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 export class ClientNewComponent implements OnInit {
 
   userId: number;
-  invoiceDataModel: InvoiceDataModel;
-  client: ClientModel;
+  client = this.initClientModel();
   searchNip: string;
 
-  clientForm = new FormGroup({
-    name: new FormControl('', Validators.required),
-    street: new FormControl('', Validators.required),
-    postcode: new FormControl('', Validators.required),
-    city: new FormControl('', Validators.required),
-    nip: new FormControl('', Validators.required),
-    phone: new FormControl(''),
-    email: new FormControl(''),
-    website: new FormControl(''),
-    comment: new FormControl('')
-    });
-
   constructor(private invoiceDataApiService: InvoiceDataApiService, private invoiceDataMapperService: InvoiceDataMapperService,
+              private clientApiService: ClientApiService, private clientMapperService: ClientMapperService,
               private route: ActivatedRoute) { }
 
   ngOnInit() {
@@ -41,13 +29,37 @@ export class ClientNewComponent implements OnInit {
   private loadInvoiceData(nip) {
     this.invoiceDataApiService.getClientFromApiByNip(nip).pipe(
       map(response => response.data),
-      map(invoiceDataDto => this.invoiceDataMapperService.mapDtoToModel(invoiceDataDto))
-    ).subscribe(invoiceData => this.invoiceDataModel = invoiceData);
+      map(invoiceDataDto => this.invoiceDataMapperService.mapInvoiceDataDtoToClientModel(invoiceDataDto))
+    ).subscribe(client => this.client = client);
   }
 
   saveClient() {
-    this.client = this.clientForm.value;
-    console.log(this.clientForm.value);
+    // this.client.user TODO dodac zalogowanego usera
+    this.clientApiService.createClient(this.clientMapperService.mapModelToDto(this.client))
+      .subscribe(
+        () => {
+          console.log('ZAPISANO'); // TODO toastr o zapisaniu
+        }
+      );
+
   }
+
+  private initClientModel(): ClientModel {
+    return {
+      id: undefined,
+      name: undefined,
+      email: undefined,
+      website: undefined,
+      phone: undefined,
+      street: undefined,
+      postcode: undefined,
+      city: undefined,
+      nip: undefined,
+      comment: undefined,
+      user: undefined
+    };
+  }
+
+
 
 }

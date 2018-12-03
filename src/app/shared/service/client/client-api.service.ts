@@ -4,7 +4,6 @@ import {Observable} from 'rxjs';
 import {ListResponse, SingleResponse} from '../../model/response.model';
 import {AppConstants} from '../../../app-constants';
 import {ClientDto} from '../../model/client/client-dto';
-import {ClientModel} from '../../model/client/client.model';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +14,11 @@ export class ClientApiService {
 
   getClientsByUserId(userId: number): Observable<ListResponse<ClientDto>> {
     return this.http.get<ListResponse<ClientDto>>(AppConstants.API_ENDPOINT + '/clients', { params: { userId: userId.toString()}});
+  }
+
+
+  createClient(client: ClientDto): Observable<SingleResponse<ClientDto>> {
+    return this.http.post<SingleResponse<ClientDto>>(AppConstants.API_ENDPOINT + '/clients', client);
   }
 
 

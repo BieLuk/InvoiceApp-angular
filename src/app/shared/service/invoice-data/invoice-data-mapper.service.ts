@@ -27,4 +27,20 @@ export class InvoiceDataMapperService {
     };
   }
 
+  mapInvoiceDataDtoToClientModel(invoice: InvoiceDataDto): ClientModel {
+    return {
+      id: undefined,
+      nip: invoice.nip,
+      name: invoice.name,
+      street: invoice.street + ' ' + invoice.streetNumber,
+      city: invoice.city,
+      postcode: invoice.postCode,
+      website: invoice.www,
+      phone: invoice.phone,
+      email: invoice.email,
+      comment: undefined,
+      user: undefined
+    };
+  }
+
 }
