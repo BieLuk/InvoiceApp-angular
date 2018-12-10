@@ -30,7 +30,7 @@
                         <p class="company-description-item"><label for="name">Nazwa firmy</label></p>
                       </div>
                       <div class="col">
-                        <textarea type="text" id="name" name="name" [(ngModel)]="client.name" rows="2"></textarea>
+                        <textarea type="text" id="name" name="name" [(ngModel)]="client.name" rows="2" required></textarea>
                       </div>
                     </div>
                     <div class="row">
@@ -38,7 +38,7 @@
                         <p class="company-description-item"><label for="street">Ulica</label></p>
                       </div>
                       <div class="col">
-                        <input type="text" class="form-control" id="street" name="street" [(ngModel)]="client.street">
+                        <input type="text" class="form-control" id="street" name="street" [(ngModel)]="client.street" required>
                       </div>
                     </div>
                     <div class="row">
@@ -46,7 +46,7 @@
                         <p class="company-description-item"><label for="postcode">Kod pocztowy</label></p>
                       </div>
                       <div class="col">
-                        <input type="text" class="form-control" id="postcode" name="postcode" [(ngModel)]="client.postcode">
+                        <input type="text" class="form-control" id="postcode" name="postcode" [(ngModel)]="client.postcode" required>
                       </div>
                     </div>
                     <div class="row">
@@ -54,7 +54,7 @@
                         <p class="company-description-item"><label for="city">Miejscowość</label></p>
                       </div>
                       <div class="col">
-                        <input type="text" class="form-control" id="city" name="city" [(ngModel)]="client.city">
+                        <input type="text" class="form-control" id="city" name="city" [(ngModel)]="client.city" required>
                       </div>
                     </div>
                     <div class="row">
@@ -62,7 +62,7 @@
                         <p class="company-description-item"><label for="city">NIP</label></p>
                       </div>
                       <div class="col">
-                        <input type="text" class="form-control" id="nip" name="nip" [(ngModel)]="client.nip">
+                        <input type="text" class="form-control" id="nip" name="nip" [(ngModel)]="client.nip" required>
                       </div>
                     </div>
                   </div>

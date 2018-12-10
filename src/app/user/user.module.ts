@@ -19,7 +19,7 @@ import {ClientNewComponent} from './client-new/client-new.component';
     UserRootComponent,
     UserSettingsComponent,
     ClientsComponent,
-    ClientNewComponent
+    ClientNewComponent,
   ],
   exports: [
     DashboardComponent,

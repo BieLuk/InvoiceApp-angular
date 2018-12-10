@@ -1,3 +1,5 @@
+import {UserSimpleDto} from './user/user-dto';
+
 export interface ResponseError {
   code: string;
   message: string;
@@ -16,3 +18,12 @@ export interface ListResponse<T> extends Response {
   data: T[];
 }
 
+export interface ApiResponse {
+  success: boolean;
+  message: string;
+}
+export interface JwtAuthenticationResponse {
+  accessToken: string;
+  tokenType: string;
+  userDto: UserSimpleDto;
+}

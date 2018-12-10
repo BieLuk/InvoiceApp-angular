@@ -12,6 +12,7 @@ export class UserMapperService {
     return {
       id: dto.id,
       name: dto.name,
+      username: dto.username,
       email: dto.email,
       password: dto.password,
       phone: dto.phone,
@@ -28,6 +29,7 @@ export class UserMapperService {
     return {
       id: model.id,
       name: model.name,
+      username: model.username,
       email: model.email,
       password: model.password,
       phone: model.phone,

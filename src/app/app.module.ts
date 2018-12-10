@@ -10,15 +10,16 @@ import {UserModule} from './user/user.module';
 import {AdminModule} from './admin/admin.module';
 import {RouterModule} from '@angular/router';
 import { ClientNewComponent } from './user/client-new/client-new.component';
+import { RegisterComponent } from './shared/component/register/register.component';
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule,
+
     NgbModule,
     SharedModule,
     UserModule,

@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {SingleResponse} from '../../model/response.model';
 import {UserDto} from '../../model/user/user-dto';
@@ -19,6 +19,11 @@ export class UserApiService {
   updateUser(user: UserDto): Observable<SingleResponse<UserDto>> {
     return this.http.put<SingleResponse<UserDto>>(AppConstants.API_ENDPOINT + '/user', user);
   }
+
+
+
+
+
 
 
 

@@ -35,12 +35,13 @@ export class ClientNewComponent implements OnInit {
 
   saveClient() {
     // this.client.user TODO dodac zalogowanego usera
-    this.clientApiService.createClient(this.clientMapperService.mapModelToDto(this.client))
-      .subscribe(
-        () => {
-          console.log('ZAPISANO'); // TODO toastr o zapisaniu
-        }
-      );
+    // this.clientApiService.createClient(this.clientMapperService.mapModelToDto(this.client))
+    //   .subscribe(
+    //     () => {
+    //       console.log('ZAPISANO'); // TODO toastr o zapisaniu
+    //     }
+    //   );
+    console.log(this.client);
 
   }
 

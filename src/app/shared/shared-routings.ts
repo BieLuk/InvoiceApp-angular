@@ -3,7 +3,7 @@ import {DashboardComponent} from '../user/dashboard/dashboard.component';
 import {UserSettingsComponent} from '../user/user-settings/user-settings.component';
 import {ClientsComponent} from '../user/clients/clients.component';
 import {HeroesComponent} from '../user/heroes/heroes.component';
-import {ClientNewComponent} from '../user/client-new/client-new.component';
+import {LoginComponent} from './component/login/login.component';
 
 export const sharedModuleRoutes: Routes = [
   {
