@@ -4,6 +4,7 @@ import {ClientApiService} from '../../shared/service/client/client-api.service';
 import {ActivatedRoute} from '@angular/router';
 import {map} from 'rxjs/operators';
 import {ClientMapperService} from '../../shared/service/client/client-mapper.service';
+import {AuthApiService} from '../../shared/service/authentication/auth-api.service';
 // require( 'datatables.net-bs4' )();
 
 @Component({
@@ -18,10 +19,12 @@ export class ClientsComponent implements OnInit {
 
   dtOptions: DataTables.Settings = {};
 
-  constructor(private clientApiService: ClientApiService, private clientMapperService: ClientMapperService,
+  constructor(private clientApiService: ClientApiService,
+              private clientMapperService: ClientMapperService,
+              private authApiService: AuthApiService,
               private route: ActivatedRoute) {}
   ngOnInit() {
-    this.userId = this.route.snapshot.queryParams['id']; // TODO tu pobrac dane z sesji
+    this.userId = this.authApiService.currentUserId;
     this.loadClients();
 
     this.dtOptions = {
@@ -35,7 +38,7 @@ export class ClientsComponent implements OnInit {
   }
 
   private loadClients() {
-    this.clientApiService.getClientsByUserId(5).pipe(
+    this.clientApiService.getClientsByUserId(this.userId).pipe(
       map(response => response.data),
       map(clientsDto => clientsDto
         .map(clientDto => this.clientMapperService.mapDtoToModel(clientDto)))

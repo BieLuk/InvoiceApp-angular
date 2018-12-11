@@ -25,5 +25,5 @@ export interface ApiResponse {
 export interface JwtAuthenticationResponse {
   accessToken: string;
   tokenType: string;
-  userDto: UserSimpleDto;
+  userDTO: UserSimpleDto;
 }

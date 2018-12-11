@@ -5,6 +5,7 @@ import {HeroesComponent} from './heroes/heroes.component';
 import {UserSettingsComponent} from './user-settings/user-settings.component';
 import {ClientsComponent} from './clients/clients.component';
 import {ClientNewComponent} from './client-new/client-new.component';
+import {AuthGuard} from '../shared/guard/AuthGuard';
 
 export const userModuleRoutes: Routes = [
   {
@@ -14,28 +15,32 @@ export const userModuleRoutes: Routes = [
       {
         path: 'dashboard',
         component: DashboardComponent,
-        pathMatch: 'full'
-
+        pathMatch: 'full',
+        canActivate: [AuthGuard]
       },
       {
         path: 'heroes',
         component: HeroesComponent,
-        pathMatch: 'full'
+        pathMatch: 'full',
+        canActivate: [AuthGuard]
       },
       {
         path: 'settings',
         component: UserSettingsComponent,
-        pathMatch: 'full'
+        pathMatch: 'full',
+        canActivate: [AuthGuard]
       },
       {
         path: 'clients',
         component: ClientsComponent,
-        pathMatch: 'full'
+        pathMatch: 'full',
+        canActivate: [AuthGuard]
       },
       {
         path: 'clients/new',
         component: ClientNewComponent,
-        pathMatch: 'full'
+        pathMatch: 'full',
+        canActivate: [AuthGuard]
       }
     ]
   }

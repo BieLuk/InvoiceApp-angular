@@ -33,29 +33,19 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.loginForm = this.formBuilder.group({
-    //   usernameOrEmail: ['', Validators.required],
-    //   password: ['', Validators.required]
-    // });
-
     // get return url from route parameters or default to '/'
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
 
-  // convenience getter for easy access to form fields
-  // get f() { return this.loginForm.controls; }
-
   onSubmit() {
     this.submitted = true;
     // stop here if form is invalid
-
 
     this.loading = true;
     this.authenticationService.login(this.authMapperService.mapModelToDto(this.userLoginModel))
       .pipe(first())
       .subscribe(
         data => {
-          console.log(data);
           this.router.navigate([this.returnUrl]);
         },
         error => {

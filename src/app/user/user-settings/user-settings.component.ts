@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import {UserModel} from '../../shared/model/user/user.model';
+import {UserModel, UserSimpleModel} from '../../shared/model/user/user.model';
 import {UserApiService} from '../../shared/service/user/user-api.service';
 import {UserMapperService} from '../../shared/service/user/user-mapper.service';
 import {ActivatedRoute} from '@angular/router';
 import {map} from 'rxjs/operators';
+import {Subscription} from 'rxjs';
+import {AuthApiService} from '../../shared/service/authentication/auth-api.service';
+import {AuthMapperService} from '../../shared/service/authentication/auth-mapper.service';
 
 @Component({
   selector: 'app-user-settings-company',
@@ -18,23 +21,33 @@ export class UserSettingsComponent implements OnInit {
   userId: number;
   userModel: UserModel;
 
-  constructor(private userApiService: UserApiService, private userMapperSerivce: UserMapperService, private route: ActivatedRoute) {  }
+  currentUser: UserSimpleModel;
+  currentUserSubscription: Subscription;
+
+  constructor(private userApiService: UserApiService,
+              private userMapperService: UserMapperService,
+              private authApiService: AuthApiService) {
+    // this.currentUserSubscription = this.authApiService.currentUser.subscribe(data => {
+    //   this.currentUser = this.userMapperService.mapSimpleDtoToSimpleModel(data.userDTO);
+    // });
+  }
 
   ngOnInit() {
-    this.userId = this.route.snapshot.queryParams['id']; // TODO tu pobrac dane z sesji
+    this.userId = this.authApiService.currentUserId;
     this.loadUserModel();
   }
 
   private loadUserModel() {
-    this.userApiService.getUserDetailsById(5).pipe(
+    this.userApiService.getUserDetailsById(this.userId).pipe(
       map(response => response.data),
-      map(userDto => this.userMapperSerivce.mapDtoToModel(userDto))
+      map(userDto => this.userMapperService.mapDtoToModel(userDto))
     ).subscribe(user => this.userModel = user);
   }
 
   changeEditUserMode() {
     this.editUserMode = !this.editUserMode;
   }
+
   changeEditCompanyMode() {
     this.editCompanyMode = !this.editCompanyMode;
   }
@@ -43,7 +56,7 @@ export class UserSettingsComponent implements OnInit {
   // TODO rozdzielić zapisywanie danych do bazy na oddzielne moduły
 
   saveChanges() {
-    this.userApiService.updateUser(this.userMapperSerivce.mapModelToDto(this.userModel))
+    this.userApiService.updateUser(this.userMapperService.mapModelToDto(this.userModel))
       .subscribe(
         () => {
           this.editUserMode = false;

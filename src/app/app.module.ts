@@ -11,6 +11,9 @@ import {AdminModule} from './admin/admin.module';
 import {RouterModule} from '@angular/router';
 import { ClientNewComponent } from './user/client-new/client-new.component';
 import { RegisterComponent } from './shared/component/register/register.component';
+import {HTTP_INTERCEPTORS} from '@angular/common/http';
+import {JwtInterceptor} from './shared/helpers/JwtInterceptor';
+import {ErrorInterceptor} from './shared/helpers/ErrorInterceptor';
 
 @NgModule({
   declarations: [
@@ -26,7 +29,10 @@ import { RegisterComponent } from './shared/component/register/register.componen
     AdminModule,
     RouterModule.forRoot(routes, {paramsInheritanceStrategy: 'always'})
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

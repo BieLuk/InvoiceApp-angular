@@ -4,26 +4,31 @@ import {UserSettingsComponent} from '../user/user-settings/user-settings.compone
 import {ClientsComponent} from '../user/clients/clients.component';
 import {HeroesComponent} from '../user/heroes/heroes.component';
 import {LoginComponent} from './component/login/login.component';
+import {AuthGuard} from './guard/AuthGuard';
 
 export const sharedModuleRoutes: Routes = [
   {
     path: 'user/clients',
     component: ClientsComponent,
-    pathMatch: 'full'
+    pathMatch: 'full',
+    canActivate: [AuthGuard]
   },
   {
     path: 'user/dashboard',
     component: DashboardComponent,
-    pathMatch: 'full'
+    pathMatch: 'full',
+    canActivate: [AuthGuard]
   },
   {
     path: 'user/settings',
     component: UserSettingsComponent,
-    pathMatch: 'full'
+    pathMatch: 'full',
+    canActivate: [AuthGuard]
   },
   {
     path: 'user/invoices',
     component: HeroesComponent,
-    pathMatch: 'full'
+    pathMatch: 'full',
+    canActivate: [AuthGuard]
   }
 ];
