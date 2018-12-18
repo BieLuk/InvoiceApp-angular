@@ -11,6 +11,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { ClientsComponent } from './clients/clients.component';
 import {ClientNewComponent} from './client-new/client-new.component';
+import { ClientEditComponent } from './client-edit/client-edit.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import {ClientNewComponent} from './client-new/client-new.component';
     UserSettingsComponent,
     ClientsComponent,
     ClientNewComponent,
+    ClientEditComponent,
   ],
   exports: [
     DashboardComponent,

@@ -16,20 +16,17 @@ export class ClientApiService {
     return this.http.get<ListResponse<ClientDto>>(AppConstants.API_ENDPOINT + '/clients', { params: { userId: userId.toString()}});
   }
 
-
   createClient(client: ClientDto): Observable<SingleResponse<ClientDto>> {
     return this.http.post<SingleResponse<ClientDto>>(AppConstants.API_ENDPOINT + '/clients', client);
   }
 
+  getClientDetailsById(clientId: number): Observable<SingleResponse<ClientDto>> {
+    return this.http.get<SingleResponse<ClientDto>>(AppConstants.API_ENDPOINT + '/clients', { params: { userId: clientId.toString() }});
+  }
 
-  //
-  // getUserDetailsById(userId: number): Observable<SingleResponse<UserDto>> {
-  //   return this.http.get<SingleResponse<UserDto>>(AppConstants.API_ENDPOINT + '/user', { params: { userId: userId.toString() }});
-  // }
-  //
-  // updateUser(user: UserDto): Observable<SingleResponse<UserDto>> {
-  //   return this.http.put<SingleResponse<UserDto>>(AppConstants.API_ENDPOINT + '/user', user);
-  // }
+  updateClient(client: ClientDto): Observable<SingleResponse<ClientDto>> {
+    return this.http.put<SingleResponse<ClientDto>>(AppConstants.API_ENDPOINT + '/clients', client);
+  }
 
 
 

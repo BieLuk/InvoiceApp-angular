@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import {LoginComponent} from './shared/component/login/login.component';
 import {DashboardComponent} from './user/dashboard/dashboard.component';
 import {AuthGuard} from './shared/guard/AuthGuard';
+import {RegisterComponent} from './shared/component/register/register.component';
 
 export const routes: Routes = [
   { path: '',
@@ -12,6 +13,11 @@ export const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
+    pathMatch: 'full'
+  },
+  {
+    path: 'register',
+    component: RegisterComponent,
     pathMatch: 'full'
   }
 

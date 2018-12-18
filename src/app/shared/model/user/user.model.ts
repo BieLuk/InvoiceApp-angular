@@ -35,7 +35,6 @@ export interface UserLoginModel {
 }
 
 export interface UserSignUpModel {
-  id: number;
   name: string;
   username: string;
   email: string;

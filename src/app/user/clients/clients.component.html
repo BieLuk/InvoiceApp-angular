@@ -12,16 +12,31 @@
               <thead>
               <tr>
                 <th>Nazwa firmy</th>
-                <th>Miejscowość</th>
-                <th>NIP</th>
+                <th>Adres email</th>
+                <th>Telefon</th>
+                <th></th>
+                <th class="none">NIP</th>
+                <th class="none">Miejscowość</th>
+                <th class="none">Ulica</th>
+                <th class="none">Kod pocztowy</th>
+                <th class="none">Strona internetowa</th>
+                <th class="none">Notatki</th>
               </tr>
               </thead>
               <tbody>
               <tr *ngFor="let client of clients">
                 <td>{{ client.name }}</td>
-                <td>{{ client.city }}</td>
-                <td>{{ client.nip }}</td>
+                <td>{{ client.email }}</td>
+                <td>{{ client.phone }}</td>
+                <td><button type="button" class="btn btn-outline-info" (click)="navigateToClientDetailsEdit(client.id)">Edytuj</button></td>
+                <td class="none">{{client.nip}}</td>
+                <td class="none">{{client.city}}</td>
+                <td class="none">{{client.street}}</td>
+                <td class="none">{{client.postcode}}</td>
+                <td class="none">{{client.website}}</td>
+                <td class="none">{{client.comment}}</td>
               </tr>
+
               </tbody>
             </table>
           </div>

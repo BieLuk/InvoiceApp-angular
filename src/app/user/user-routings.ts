@@ -6,6 +6,7 @@ import {UserSettingsComponent} from './user-settings/user-settings.component';
 import {ClientsComponent} from './clients/clients.component';
 import {ClientNewComponent} from './client-new/client-new.component';
 import {AuthGuard} from '../shared/guard/AuthGuard';
+import {ClientEditComponent} from './client-edit/client-edit.component';
 
 export const userModuleRoutes: Routes = [
   {
@@ -39,6 +40,12 @@ export const userModuleRoutes: Routes = [
       {
         path: 'clients/new',
         component: ClientNewComponent,
+        pathMatch: 'full',
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'clients/edit',
+        component: ClientEditComponent,
         pathMatch: 'full',
         canActivate: [AuthGuard]
       }

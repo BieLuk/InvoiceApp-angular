@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
-import {UserDto, UserLoginDto} from '../../model/user/user-dto';
-import {UserLoginModel, UserModel} from '../../model/user/user.model';
+import {UserDto, UserLoginDto, UserSignUpDto} from '../../model/user/user-dto';
+import {UserLoginModel, UserModel, UserSignUpModel} from '../../model/user/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +8,7 @@ import {UserLoginModel, UserModel} from '../../model/user/user.model';
 export class AuthMapperService {
   constructor() {}
 
-  mapDtoToModel(dto: UserLoginDto): UserLoginModel {
+  mapLoginDtoToLoginModel(dto: UserLoginDto): UserLoginModel {
     return {
       id: dto.id,
       usernameOrEmail: dto.usernameOrEmail,
@@ -17,12 +17,30 @@ export class AuthMapperService {
     };
   }
 
-  mapModelToDto(model: UserLoginModel): UserLoginDto {
+  mapLoginModelToLoginDto(model: UserLoginModel): UserLoginDto {
     return {
       id: model.id,
       usernameOrEmail: model.usernameOrEmail,
       password: model.password,
       token: model.token
+    };
+  }
+
+  mapSignUpDtoToSignUpModel(dto: UserSignUpDto): UserSignUpModel {
+    return {
+      name: dto.name,
+      username: dto.username,
+      email: dto.email,
+      password: dto.password,
+    };
+  }
+
+  mapSignUpModelToSignUpDto(model: UserSignUpModel): UserSignUpDto {
+    return {
+      name: model.name,
+      username: model.username,
+      email: model.email,
+      password: model.password,
     };
   }
 

@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
     // stop here if form is invalid
 
     this.loading = true;
-    this.authenticationService.login(this.authMapperService.mapModelToDto(this.userLoginModel))
+    this.authenticationService.login(this.authMapperService.mapLoginModelToLoginDto(this.userLoginModel))
       .pipe(first())
       .subscribe(
         data => {

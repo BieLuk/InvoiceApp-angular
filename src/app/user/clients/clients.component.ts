@@ -1,11 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ClientModel} from '../../shared/model/client/client.model';
 import {ClientApiService} from '../../shared/service/client/client-api.service';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {map} from 'rxjs/operators';
 import {ClientMapperService} from '../../shared/service/client/client-mapper.service';
 import {AuthApiService} from '../../shared/service/authentication/auth-api.service';
-// require( 'datatables.net-bs4' )();
 
 @Component({
   selector: 'app-client',
@@ -16,35 +15,58 @@ export class ClientsComponent implements OnInit {
 
   userId: number;
   clients: ClientModel[];
-
-  dtOptions: DataTables.Settings = {};
+  expandClientMode = false;
+  dtOptions: any = {};
 
   constructor(private clientApiService: ClientApiService,
               private clientMapperService: ClientMapperService,
               private authApiService: AuthApiService,
-              private route: ActivatedRoute) {}
+              private router: Router) { }
+
   ngOnInit() {
     this.userId = this.authApiService.currentUserId;
     this.loadClients();
 
     this.dtOptions = {
-      // columnDefs: [
-      //   { width: '33%', targets: 0}
-      // ],
+      responsive: {
+        details: {
+          renderer: function (api, rowId, columns) {
+            const data = $.map(columns, function(col, i) {
+              return col.hidden ?
+                '<tr data-dt-row="' + col.rowIndex + '" data-dt-column="' + col.columnIndex + '"> ' +
+                '<td style="padding-left: 25px; width: 300px">' + col.title + ':' + '</td> ' +
+                '<td style="padding-left: 50px; width: 500px">' + col.data + '</td>' +
+                '</tr>' :
+                '';
+            }).join('');
+            return data ?
+              $('<table/>').append( data ) :
+              false;
+          }
+        }
+      },
+      columnDefs: [
+        // { width: '65%', targets: 0}
+      ],
+      order: [[0, 'asc']],
       language: {
         url: '//cdn.datatables.net/plug-ins/1.10.19/i18n/Polish.json'
-      }
+      },
+
     };
+
   }
 
   private loadClients() {
-    this.clientApiService.getClientsByUserId(this.userId).pipe(
+    this.clientApiService.getClientsByUserId(1).pipe(
       map(response => response.data),
       map(clientsDto => clientsDto
-        .map(clientDto => this.clientMapperService.mapDtoToModel(clientDto)))
+      .map(clientDto => this.clientMapperService.mapDtoToModel(clientDto)))
     ).subscribe(clients => this.clients = clients);
   }
 
-
+  navigateToClientDetailsEdit(clientId: number) {
+    this.router.navigate(['user', 'clients', 'edit'], {queryParams: { id: clientId}});
+  }
 
 }

@@ -1,3 +1,41 @@
-<p>
-  register works!
-</p>
+<div class="container">
+  <h2>Zarejestruj się</h2>
+  <form #registerForm="ngForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="name">Nazwa</label>
+      <input id="name" name="name" type="text" [(ngModel)]="userSignUpModel.name" class="form-control" />
+      <!--<div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">-->
+        <!--<div *ngIf="f.firstName.errors.required">First Name is required</div>-->
+      <!--</div>-->
+    </div>
+    <div class="form-group">
+      <label for="username">Nazwa użytkownika</label>
+      <input type="text" id="username" name="username" [(ngModel)]="userSignUpModel.username" class="form-control" />
+      <!--<div *ngIf="submitted && f.username.errors" class="invalid-feedback">-->
+        <!--<div *ngIf="f.username.errors.required">Username is required</div>-->
+      <!--</div>-->
+    </div>
+    <div class="form-group">
+      <label for="email">Adres e-mail</label>
+      <input type="text" id="email" name="email" [(ngModel)]="userSignUpModel.email" class="form-control" />
+      <!--<div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">-->
+        <!--<div *ngIf="f.lastName.errors.required">Last Name is required</div>-->
+      <!--</div>-->
+    </div>
+    <div class="form-group">
+      <label for="password1">Hasło</label>
+      <input id="password1" name="password1" type="password" [(ngModel)]="userSignUpModel.password" class="form-control" />
+      <label for="password1">Powtórz hasło</label>
+      <input id="password2" name="password2" type="password" [(ngModel)]="repeatPassword" class="form-control" />
+      <!--<div *ngIf="submitted && f.password.errors" class="invalid-feedback">-->
+        <!--<div *ngIf="f.password.errors.required">Password is required</div>-->
+        <!--<div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>-->
+      <!--</div>-->
+    </div>
+    <div class="form-group">
+      <button [disabled]="loading" class="btn btn-primary">Zarejestruj</button>
+      <img *ngIf="loading" class="pl-3" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+      <a routerLink="/login" class="btn btn-link">Cancel</a>
+    </div>
+  </form>
+</div>

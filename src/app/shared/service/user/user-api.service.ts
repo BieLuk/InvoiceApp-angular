@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {SingleResponse} from '../../model/response.model';
-import {UserDto} from '../../model/user/user-dto';
+import {UserDto, UserSignUpDto} from '../../model/user/user-dto';
 import {AppConstants} from '../../../app-constants';
 
 @Injectable({

@@ -21,15 +21,9 @@ export class UserSettingsComponent implements OnInit {
   userId: number;
   userModel: UserModel;
 
-  currentUser: UserSimpleModel;
-  currentUserSubscription: Subscription;
-
   constructor(private userApiService: UserApiService,
               private userMapperService: UserMapperService,
               private authApiService: AuthApiService) {
-    // this.currentUserSubscription = this.authApiService.currentUser.subscribe(data => {
-    //   this.currentUser = this.userMapperService.mapSimpleDtoToSimpleModel(data.userDTO);
-    // });
   }
 
   ngOnInit() {

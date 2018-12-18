@@ -3,7 +3,7 @@ import {HttpClient, HttpResponse} from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import {AppConstants} from '../../../app-constants';
-import {UserLoginDto} from '../../model/user/user-dto';
+import {UserLoginDto, UserSignUpDto} from '../../model/user/user-dto';
 import {JwtAuthenticationResponse} from '../../model/response.model';
 
 
@@ -20,6 +20,10 @@ export class AuthApiService {
 
   public get currentUserValue(): JwtAuthenticationResponse {
     return this.currentUserSubject.value;
+  }
+
+  signUp(user: UserSignUpDto) {
+    return this.http.post(AppConstants.API_ENDPOINT + '/auth/signup', user);
   }
 
   login(userLoginDto: UserLoginDto) {
