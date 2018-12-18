@@ -1,0 +1,49 @@
+.company-description-item {
+  font-size: 13px;
+  color: #607d8b;
+  text-align: right;
+  margin-top: 9px;
+  margin-bottom: 29px;
+}
+
+.company-item {
+  font-size: 22px;
+}
+
+input:hover, input:focus {
+  background-color: #FFFFFF;
+}
+
+input {
+  width: 100%;
+}
+
+.form-control {
+  outline: none;
+  box-shadow:none !important;
+}
+
+.form-control:hover, .form-control:focus {
+  font-size: 17px;
+  padding-left: 8px;
+}
+
+textarea:enabled:hover, textarea:enabled:focus {
+  border-radius: 10px;
+  padding-left: 8px;
+  font-size: 17px;
+  outline: none;
+}
+
+textarea:enabled {
+  width: 100%;
+  border-color: #23bbff;
+  border-radius: 10px;
+  padding-left: 8px;
+}
+
+.container-fluid {
+  width: 65%;
+}
+
+

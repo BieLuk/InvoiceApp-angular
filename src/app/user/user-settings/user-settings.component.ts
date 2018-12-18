@@ -19,7 +19,7 @@ export class UserSettingsComponent implements OnInit {
   editCompanyMode = false;
 
   userId: number;
-  userModel: UserModel;
+  clientModel: UserModel;
 
   constructor(private userApiService: UserApiService,
               private userMapperService: UserMapperService,
@@ -35,7 +35,7 @@ export class UserSettingsComponent implements OnInit {
     this.userApiService.getUserDetailsById(this.userId).pipe(
       map(response => response.data),
       map(userDto => this.userMapperService.mapDtoToModel(userDto))
-    ).subscribe(user => this.userModel = user);
+    ).subscribe(user => this.clientModel = user);
   }
 
   changeEditUserMode() {
@@ -50,7 +50,7 @@ export class UserSettingsComponent implements OnInit {
   // TODO rozdzielić zapisywanie danych do bazy na oddzielne moduły
 
   saveChanges() {
-    this.userApiService.updateUser(this.userMapperService.mapModelToDto(this.userModel))
+    this.userApiService.updateUser(this.userMapperService.mapModelToDto(this.clientModel))
       .subscribe(
         () => {
           this.editUserMode = false;

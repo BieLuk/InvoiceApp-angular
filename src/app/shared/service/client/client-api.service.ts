@@ -21,11 +21,11 @@ export class ClientApiService {
   }
 
   getClientDetailsById(clientId: number): Observable<SingleResponse<ClientDto>> {
-    return this.http.get<SingleResponse<ClientDto>>(AppConstants.API_ENDPOINT + '/clients', { params: { userId: clientId.toString() }});
+    return this.http.get<SingleResponse<ClientDto>>(AppConstants.API_ENDPOINT + '/clients/client', { params: { clientId: clientId.toString() }});
   }
 
   updateClient(client: ClientDto): Observable<SingleResponse<ClientDto>> {
-    return this.http.put<SingleResponse<ClientDto>>(AppConstants.API_ENDPOINT + '/clients', client);
+    return this.http.put<SingleResponse<ClientDto>>(AppConstants.API_ENDPOINT + '/clients/client', client);
   }
 
 

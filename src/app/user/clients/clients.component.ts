@@ -45,9 +45,6 @@ export class ClientsComponent implements OnInit {
           }
         }
       },
-      columnDefs: [
-        // { width: '65%', targets: 0}
-      ],
       order: [[0, 'asc']],
       language: {
         url: '//cdn.datatables.net/plug-ins/1.10.19/i18n/Polish.json'
