@@ -51,6 +51,7 @@ export class RegisterComponent implements OnInit {
     // if (this.registerForm.invalid) {
     //   return;
     // }
+    // TODO WALIDACJA
 
     if (this.userSignUpModel.password === this.repeatPassword) {
 

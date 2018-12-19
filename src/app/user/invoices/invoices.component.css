@@ -1,0 +1,28 @@
+.new-client-btn {
+  color: #039be5;
+  background-color: #FFFFFF;
+  position: relative;
+}
+
+.new-client-btn:after{
+  content: '';
+  position: absolute;
+  width: 0; height: 4px;
+  display: block;
+  margin-top: 5px;
+  right: 0;
+  background: #039be5;
+  transition: width .3s ease;
+  -webkit-transition: width .3s ease;
+}
+
+.new-client-btn:hover:after{
+  width: 100%;
+  left: 0;
+  background: #039be5;
+}
+
+.new-client-btn:focus, .edit-btn:active{
+  outline: none;
+  box-shadow: none;
+}

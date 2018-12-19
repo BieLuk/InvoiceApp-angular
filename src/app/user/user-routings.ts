@@ -7,6 +7,7 @@ import {ClientsComponent} from './clients/clients.component';
 import {ClientNewComponent} from './client-new/client-new.component';
 import {AuthGuard} from '../shared/guard/AuthGuard';
 import {ClientEditComponent} from './client-edit/client-edit.component';
+import {InvoicesComponent} from './invoices/invoices.component';
 
 export const userModuleRoutes: Routes = [
   {
@@ -20,8 +21,8 @@ export const userModuleRoutes: Routes = [
         canActivate: [AuthGuard]
       },
       {
-        path: 'heroes',
-        component: HeroesComponent,
+        path: 'invoices',
+        component: InvoicesComponent,
         pathMatch: 'full',
         canActivate: [AuthGuard]
       },

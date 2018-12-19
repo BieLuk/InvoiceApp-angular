@@ -12,6 +12,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { ClientsComponent } from './clients/clients.component';
 import {ClientNewComponent} from './client-new/client-new.component';
 import { ClientEditComponent } from './client-edit/client-edit.component';
+import { InvoicesComponent } from './invoices/invoices.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { ClientEditComponent } from './client-edit/client-edit.component';
     ClientsComponent,
     ClientNewComponent,
     ClientEditComponent,
+    InvoicesComponent,
   ],
   exports: [
     DashboardComponent,

@@ -15,7 +15,6 @@ export class ClientsComponent implements OnInit {
 
   userId: number;
   clients: ClientModel[];
-  expandClientMode = false;
   dtOptions: any = {};
 
   constructor(private clientApiService: ClientApiService,
@@ -45,6 +44,18 @@ export class ClientsComponent implements OnInit {
           }
         }
       },
+      columnDefs: [
+        {
+          targets: [0],
+          width: '55%',
+        },
+        {
+          targets: [3],
+          orderable: false,
+          searchable: false,
+          width: '50px'
+        },
+      ],
       order: [[0, 'asc']],
       language: {
         url: '//cdn.datatables.net/plug-ins/1.10.19/i18n/Polish.json'

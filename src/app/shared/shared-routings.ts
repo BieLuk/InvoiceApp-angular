@@ -5,6 +5,7 @@ import {ClientsComponent} from '../user/clients/clients.component';
 import {HeroesComponent} from '../user/heroes/heroes.component';
 import {LoginComponent} from './component/login/login.component';
 import {AuthGuard} from './guard/AuthGuard';
+import {InvoicesComponent} from '../user/invoices/invoices.component';
 
 export const sharedModuleRoutes: Routes = [
   {
@@ -27,7 +28,7 @@ export const sharedModuleRoutes: Routes = [
   },
   {
     path: 'user/invoices',
-    component: HeroesComponent,
+    component: InvoicesComponent,
     pathMatch: 'full',
     canActivate: [AuthGuard]
   }
