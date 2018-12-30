@@ -1,13 +1,13 @@
 import {Routes} from '@angular/router';
 import {UserRootComponent} from './user-root.component';
 import {DashboardComponent} from './dashboard/dashboard.component';
-import {HeroesComponent} from './heroes/heroes.component';
 import {UserSettingsComponent} from './user-settings/user-settings.component';
 import {ClientsComponent} from './clients/clients.component';
 import {ClientNewComponent} from './client-new/client-new.component';
 import {AuthGuard} from '../shared/guard/AuthGuard';
 import {ClientEditComponent} from './client-edit/client-edit.component';
 import {InvoicesComponent} from './invoices/invoices.component';
+import {InvoiceNewComponent} from './invoice-new/invoice-new.component';
 
 export const userModuleRoutes: Routes = [
   {
@@ -21,14 +21,20 @@ export const userModuleRoutes: Routes = [
         canActivate: [AuthGuard]
       },
       {
+        path: 'settings',
+        component: UserSettingsComponent,
+        pathMatch: 'full',
+        canActivate: [AuthGuard]
+      },
+      {
         path: 'invoices',
         component: InvoicesComponent,
         pathMatch: 'full',
         canActivate: [AuthGuard]
       },
       {
-        path: 'settings',
-        component: UserSettingsComponent,
+        path: 'invoices/new',
+        component: InvoiceNewComponent,
         pathMatch: 'full',
         canActivate: [AuthGuard]
       },

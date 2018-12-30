@@ -2,8 +2,6 @@ import {Routes} from '@angular/router';
 import {DashboardComponent} from '../user/dashboard/dashboard.component';
 import {UserSettingsComponent} from '../user/user-settings/user-settings.component';
 import {ClientsComponent} from '../user/clients/clients.component';
-import {HeroesComponent} from '../user/heroes/heroes.component';
-import {LoginComponent} from './component/login/login.component';
 import {AuthGuard} from './guard/AuthGuard';
 import {InvoicesComponent} from '../user/invoices/invoices.component';
 

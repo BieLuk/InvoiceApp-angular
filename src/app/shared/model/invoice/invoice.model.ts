@@ -1,18 +1,20 @@
-import {UserSimpleDto} from '../user/user-dto';
-import {ClientDto} from '../client/client-dto';
-import {PaymentTypeDto} from './payment-type.dto';
-import {InvoiceTypeDto} from './invoice-type.dto';
+import {ClientModel} from '../client/client.model';
+import {PaymentTypeModel} from './payment-type.model';
+import {InvoiceTypeModel} from './invoice-type.model';
+import {UserSimpleModel} from '../user/user.model';
+import {NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
+
 
 export interface InvoiceModel {
   id: number;
   invoiceNumber: string;
-  user: UserSimpleDto;
+  user: UserSimpleModel;
   createDate: string;
   saleDate: string;
   paymentDate: string;
   netValue: number;
   grossValue: number;
-  paymentType: PaymentTypeDto;
-  invoiceType: InvoiceTypeDto;
-  client: ClientDto;
+  paymentType: PaymentTypeModel;
+  invoiceType: InvoiceTypeModel;
+  client: ClientModel;
 }

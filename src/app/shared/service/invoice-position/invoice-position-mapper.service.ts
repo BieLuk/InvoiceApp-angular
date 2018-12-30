@@ -7,7 +7,7 @@ import {NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
 @Injectable({
   providedIn: 'root'
 })
-export class InvoiceMapperService {
+export class InvoicePositionMapperService {
   constructor() {
   }
 
