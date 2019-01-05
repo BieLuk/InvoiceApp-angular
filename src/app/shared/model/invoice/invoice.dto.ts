@@ -11,10 +11,10 @@ export interface InvoiceDto {
   createDate: string;
   saleDate: string;
   paymentDate: string;
-  netValue: number;
-  grossValue: number;
+  netAmount: number;
+  grossAmount: number;
   paymentType: PaymentTypeDto;
-  invoiceType: InvoiceTypeDto;
+  invoiceVersion: InvoiceTypeDto;
   client: ClientDto;
   invoicePositions: InvoicePositionDto[];
 }

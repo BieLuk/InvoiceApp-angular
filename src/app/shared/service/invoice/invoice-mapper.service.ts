@@ -19,10 +19,10 @@ export class InvoiceMapperService {
       createDate: dto.createDate,
       saleDate: dto.saleDate,
       paymentDate: dto.paymentDate,
-      netValue: dto.netValue,
-      grossValue: dto.grossValue,
+      netAmount: dto.netAmount,
+      grossAmount: dto.grossAmount,
       paymentType: dto.paymentType,
-      invoiceType: dto.invoiceType,
+      invoiceVersion: dto.invoiceVersion,
       client: dto.client,
       invoicePositions: dto.invoicePositions
     };
@@ -36,10 +36,10 @@ export class InvoiceMapperService {
       createDate: model.createDate,
       saleDate: model.saleDate,
       paymentDate: model.paymentDate,
-      netValue: model.netValue,
-      grossValue: model.grossValue,
+      netAmount: model.netAmount,
+      grossAmount: model.grossAmount,
       paymentType: model.paymentType,
-      invoiceType: model.invoiceType,
+      invoiceVersion: model.invoiceVersion,
       client: model.client,
       invoicePositions: model.invoicePositions
 

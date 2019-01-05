@@ -28,12 +28,12 @@
                 <td>{{ invoice.invoiceNumber }}</td>
                 <td>{{ invoice.client.name }}</td>
                 <td>{{ invoice.createDate }}</td>
-                <td>{{ invoice.grossValue }}</td>
+                <td>{{ invoice.grossAmount }}</td>
                 <td><button type="button" class="btn btn-outline-info" (click)="navigateToInvoiceDetails(invoice.id)">Szczegóły</button></td>
                 <td class="none">{{invoice.saleDate}}</td>
                 <td class="none">{{invoice.paymentDate}}</td>
-                <td class="none">{{invoice.netValue}}</td>
-                <td class="none">{{invoice.invoiceType.name}}</td>
+                <td class="none">{{invoice.netAmount}}</td>
+                <td class="none">{{invoice.invoiceVersion.name}}</td>
                 <td class="none">{{invoice.paymentType.name}}</td>
               </tr>
 

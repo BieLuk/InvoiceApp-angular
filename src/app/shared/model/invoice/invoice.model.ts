@@ -11,10 +11,10 @@ export interface InvoiceModel {
   createDate: string;
   saleDate: string;
   paymentDate: string;
-  netValue: number;
-  grossValue: number;
+  netAmount: number;
+  grossAmount: number;
   paymentType: PaymentTypeModel;
-  invoiceType: InvoiceTypeModel;
+  invoiceVersion: InvoiceTypeModel;
   client: ClientModel;
   invoicePositions: InvoicePositionModel[];
 }

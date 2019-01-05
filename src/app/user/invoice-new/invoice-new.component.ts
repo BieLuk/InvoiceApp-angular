@@ -96,15 +96,13 @@ export class InvoiceNewComponent implements OnInit {
     this.invoiceApiService.createInvoice(this.invoiceMapperService.mapModelToDto(this.invoice))
       .subscribe(
         () => {
-          console.log(this.invoice);
+          // TODO toastr, navigate
         }
       );
   }
 
   addInvoicePosition() {
     this.invoicePositions.push(this.initInvoicePositionModel());
-    console.log(this.invoicePositions);
-    console.log(this.invoice);
   }
 
   calculateNetValue(quantity: number, netPrice: number) {
@@ -123,14 +121,14 @@ export class InvoiceNewComponent implements OnInit {
     return (+netValue + +vatAmount).toFixed(2);
   }
 
-  calculateInvoiceGrossValue() {
+  calculateInvoiceGrossAmount() {
     let grossValue = 0;
     this.invoicePositions.forEach(position => grossValue += +position.grossValue);
 
     return grossValue.toFixed(2);
   }
 
-  calculateInvoiceNetValue() {
+  calculateInvoiceNetAmount() {
     let netValue = 0;
     this.invoicePositions.forEach(position => netValue += +position.netValue);
 
@@ -153,10 +151,10 @@ export class InvoiceNewComponent implements OnInit {
       createDate: undefined,
       saleDate: undefined,
       paymentDate: undefined,
-      netValue: 0,
-      grossValue: 0,
+      netAmount: 0,
+      grossAmount: 0,
       paymentType: undefined,
-      invoiceType: this.initInvoiceTypeModel(),
+      invoiceVersion: this.initInvoiceTypeModel(),
       client: undefined,
       invoicePositions: undefined
     };
