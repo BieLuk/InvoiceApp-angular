@@ -1,8 +1,7 @@
 
 import {Injectable} from '@angular/core';
-import {InvoiceDto} from '../../model/invoice/invoice.dto';
-import {InvoiceModel} from '../../model/invoice/invoice.model';
-import {NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
+import {InvoicePositionDto} from '../../model/invoice/invoice-position.dto';
+import {InvoicePositionModel} from '../../model/invoice/invoice-position.model';
 
 @Injectable({
   providedIn: 'root'
@@ -11,45 +10,32 @@ export class InvoicePositionMapperService {
   constructor() {
   }
 
-  mapDtoToModel(dto: InvoiceDto): InvoiceModel {
+  mapDtoToModel(dto: InvoicePositionDto): InvoicePositionModel {
     return {
       id: dto.id,
-      invoiceNumber: dto.invoiceNumber,
-      user: dto.user,
-      createDate: dto.createDate,
-      saleDate: dto.saleDate,
-      paymentDate: dto.paymentDate,
+      name: dto.name,
+      unit: dto.unit,
+      quantity: dto.quantity,
+      netPrice: dto.netPrice,
       netValue: dto.netValue,
       grossValue: dto.grossValue,
-      paymentType: dto.paymentType,
-      invoiceType: dto.invoiceType,
-      client: dto.client
+      vatType: dto.vatType,
+      vatValue: dto.vatValue
     };
   }
 
-  mapModelToDto(model: InvoiceModel): InvoiceDto {
+  mapModelToDto(model: InvoicePositionModel): InvoicePositionDto {
     return {
       id: model.id,
-      invoiceNumber: model.invoiceNumber,
-      user: model.user,
-      createDate: model.createDate.toString(),
-      saleDate: model.saleDate.toString(),
-      paymentDate: model.paymentDate.toString(),
+      name: model.name,
+      unit: model.unit,
+      quantity: model.quantity,
+      netPrice: model.netPrice,
       netValue: model.netValue,
       grossValue: model.grossValue,
-      paymentType: model.paymentType,
-      invoiceType: model.invoiceType,
-      client: model.client
+      vatType: model.vatType,
+      vatValue: model.vatValue
     };
   }
 
-  toNgbDateStruct(stringDate: string) {
-    // const stringDateYear = stringDate.substr(0, 4);
-    // const stringDate = stringDate.substr(0, 4);
-    //
-    // const date: NgbDateStruct = {
-    //   day = stringDate.sub
-    // }
-
-  }
 }

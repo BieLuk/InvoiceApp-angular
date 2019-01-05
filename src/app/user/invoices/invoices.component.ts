@@ -46,14 +46,9 @@ export class InvoicesComponent implements OnInit {
       },
       columnDefs: [
         {
-          targets: [1],
-          width: '45%',
-        },
-        {
           targets: [4],
           orderable: false,
           searchable: false,
-          width: '50px'
         },
       ],
       order: [[0, 'asc']],
@@ -72,9 +67,9 @@ export class InvoicesComponent implements OnInit {
         .map(invoiceDto => this.invoiceMapperService.mapDtoToModel(invoiceDto)))
     ).subscribe(invoices => this.invoices = invoices);
   }
-  //
-  // navigateToClientDetailsEdit(clientId: number) {
-  //   this.router.navigate(['user', 'clients', 'edit'], {queryParams: { id: clientId}});
-  // }
+
+  navigateToInvoiceDetails(invoiceId: number) {
+    this.router.navigate(['user', 'invoices', 'details'], {queryParams: { id: invoiceId}});
+  }
 
 }

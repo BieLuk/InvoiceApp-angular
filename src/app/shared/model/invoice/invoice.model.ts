@@ -2,8 +2,7 @@ import {ClientModel} from '../client/client.model';
 import {PaymentTypeModel} from './payment-type.model';
 import {InvoiceTypeModel} from './invoice-type.model';
 import {UserSimpleModel} from '../user/user.model';
-import {NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
-
+import {InvoicePositionModel} from './invoice-position.model';
 
 export interface InvoiceModel {
   id: number;
@@ -17,4 +16,5 @@ export interface InvoiceModel {
   paymentType: PaymentTypeModel;
   invoiceType: InvoiceTypeModel;
   client: ClientModel;
+  invoicePositions: InvoicePositionModel[];
 }

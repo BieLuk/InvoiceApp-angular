@@ -42,7 +42,7 @@
               </div>
               <div class="col-2">
                 <div class="input-group">
-                  <input class="form-control" id="createDate" name="createDate" [(ngModel)]="invoice.createDate"  ngbDatepicker #createDate="ngbDatepicker">
+                  <input class="form-control" id="createDate" name="createDate" [(ngModel)]="createDateInvoice"  (ngModelChange)="createDateChange($event)" ngbDatepicker #createDate="ngbDatepicker">
                   <div class="input-group-append">
                     <button class="btn btn-outline-secondary calendar" (click)="createDate.toggle()" type="button"><i class="far fa-calendar-alt "></i></button>
                   </div>
@@ -54,7 +54,7 @@
               </div>
               <div class="col-2">
                 <div class="input-group">
-                  <input class="form-control" id="saleDate" name="saleDate" [(ngModel)]="invoice.saleDate"  ngbDatepicker #saleDate="ngbDatepicker">
+                  <input class="form-control" id="saleDate" name="saleDate" [(ngModel)]="saleDateInvoice"  (ngModelChange)="saleDateChange($event)" ngbDatepicker #saleDate="ngbDatepicker">
                   <div class="input-group-append">
                     <button class="btn btn-outline-secondary calendar" (click)="saleDate.toggle()" type="button"><i class="far fa-calendar-alt "></i></button>
                   </div>
@@ -66,7 +66,7 @@
               </div>
               <div class="col-2">
                 <div class="input-group">
-                  <input class="form-control" id="paymentDate" name="paymentDate" [(ngModel)]="invoice.paymentDate"  ngbDatepicker #paymentDate="ngbDatepicker">
+                  <input class="form-control" id="paymentDate" name="paymentDate" [(ngModel)]="paymentDateInvoice"  (ngModelChange)="paymentDateChange($event)"  ngbDatepicker #paymentDate="ngbDatepicker">
                   <div class="input-group-append">
                     <button class="btn btn-outline-secondary calendar" (click)="paymentDate.toggle()" type="button"><i class="far fa-calendar-alt "></i></button>
                   </div>
@@ -101,16 +101,16 @@
                   <input id="position_unit" name="position_unit" #positionUnit class="form-control" [(ngModel)]="position.unit" />
                 </div>
                 <div class="col-1">
-                  <input id="position_quantity" name="position_quantity" #positionQuantity class="form-control" [(ngModel)]="position.quantity" (ngModelChange)="position.netValue = calculateNetValue(position.quantity, position.netPrice); position.vatValue = calculateVatAmount(position.netValue, position.vatType.value); position.grossValue = calculateGrossValue(position.netValue, position.vatValue)" />
+                  <input id="position_quantity" name="position_quantity" #positionQuantity class="form-control" [(ngModel)]="position.quantity" (ngModelChange)="position.netValue = calculateNetValue(position.quantity, position.netPrice); position.vatValue = calculateVatAmount(position.netValue, position.vatType.value); position.grossValue = calculateGrossValue(position.netValue, position.vatValue); invoice.grossValue = calculateInvoiceGrossValue(); invoice.netValue = calculateInvoiceNetValue()" />
                 </div>
                 <div class="col-1">
-                  <input id="position_netPrice" name="position_netPrice" #positionNetPrice class="form-control" [(ngModel)]="position.netPrice" (ngModelChange)="position.netValue = calculateNetValue(position.quantity, position.netPrice); position.vatValue = calculateVatAmount(position.netValue, position.vatType.value); position.grossValue = calculateGrossValue(position.netValue, position.vatValue)" />
+                  <input id="position_netPrice" name="position_netPrice" #positionNetPrice class="form-control" [(ngModel)]="position.netPrice" (ngModelChange)="position.netValue = calculateNetValue(position.quantity, position.netPrice); position.vatValue = calculateVatAmount(position.netValue, position.vatType.value); position.grossValue = calculateGrossValue(position.netValue, position.vatValue); invoice.grossValue = calculateInvoiceGrossValue(); invoice.netValue = calculateInvoiceNetValue()" />
                 </div>
                 <div class="col-1">
-                  <input id="position_netValue" name="position_netValue" #positionNetValue class="form-control" [(ngModel)]="position.netValue"  (ngModelChange)="position.netPrice = calculateNetPrice(position.netValue, position.quantity); position.vatValue = calculateVatAmount(position.netValue, position.vatType.value); position.grossValue = calculateGrossValue(position.netValue, position.vatValue)"/>
+                  <input id="position_netValue" name="position_netValue" #positionNetValue class="form-control" [(ngModel)]="position.netValue"  (ngModelChange)="position.netPrice = calculateNetPrice(position.netValue, position.quantity); position.vatValue = calculateVatAmount(position.netValue, position.vatType.value); position.grossValue = calculateGrossValue(position.netValue, position.vatValue); invoice.grossValue = calculateInvoiceGrossValue(); invoice.netValue = calculateInvoiceNetValue()"/>
                 </div>
                 <div class="col-1">
-                  <select id="position_vatType" name="position_vatType" #positionVatType class="form-control"   [(ngModel)]="position.vatType" (ngModelChange)="position.vatValue = calculateVatAmount(position.netValue, position.vatType.value); position.grossValue = calculateGrossValue(position.netValue, position.vatValue)">
+                  <select id="position_vatType" name="position_vatType" #positionVatType class="form-control"   [(ngModel)]="position.vatType" (ngModelChange)="position.vatValue = calculateVatAmount(position.netValue, position.vatType.value); position.grossValue = calculateGrossValue(position.netValue, position.vatValue); invoice.grossValue = calculateInvoiceGrossValue(); invoice.netValue = calculateInvoiceNetValue()">
                     <option *ngFor="let vatType of vatTypes" [ngValue]="vatType">{{vatType.name}}</option>
                   </select>
 
@@ -126,8 +126,37 @@
             </div>
           </div>
 
+          <div class="row d-flex justify-content-between">
+            <button type="button" class="btn btn-success  mt-3 ml-3" (click)="addInvoicePosition()"><i class="fas fa-plus"></i> Dodaj pole</button>
+            <button type="button" class="btn btn-danger  mt-3 mr-3" [disabled]="invoicePositions.length <= 1" (click)="removeLastInvoicePosition()"><i class="fas fa-minus"></i> Usuń ostatnie pole</button>
 
-          <button type="button" class="btn btn-default" (click)="addInvoicePosition()">Dodaj pole</button>
+          </div>
+
+          <hr />
+
+          <div class="row">
+            <div class="col-10">
+              <p class="invoice-description-item"><label for="invoice-net">Całkowita wartość netto</label></p>
+            </div>
+            <div class="col-2">
+              <p class="invoice-item" style="text-align: right" type="text" id="invoice-net">{{invoice.netValue}} zł</p>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-10">
+              <p class="invoice-description-item"><label for="invoice-gross">Całkowita wartość brutto</label></p>
+            </div>
+            <div class="col-2">
+              <p class="invoice-item" style="text-align: right" type="text" id="invoice-gross">{{invoice.grossValue}} zł</p>
+            </div>
+          </div>
+
+          <div class="row float-right">
+            <div class="flex-column mr-3">
+              <button type="button" class="btn btn-primary" (click)="saveInvoice()" ><i class="fas fa-check"></i> Zapisz fakturę</button>
+            </div>
+          </div>
         </div>
       </div>
 

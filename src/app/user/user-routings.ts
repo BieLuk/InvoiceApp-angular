@@ -8,6 +8,7 @@ import {AuthGuard} from '../shared/guard/AuthGuard';
 import {ClientEditComponent} from './client-edit/client-edit.component';
 import {InvoicesComponent} from './invoices/invoices.component';
 import {InvoiceNewComponent} from './invoice-new/invoice-new.component';
+import {InvoiceDetailsComponent} from './invoice-details/invoice-details.component';
 
 export const userModuleRoutes: Routes = [
   {
@@ -35,6 +36,12 @@ export const userModuleRoutes: Routes = [
       {
         path: 'invoices/new',
         component: InvoiceNewComponent,
+        pathMatch: 'full',
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'invoices/details',
+        component: InvoiceDetailsComponent,
         pathMatch: 'full',
         canActivate: [AuthGuard]
       },

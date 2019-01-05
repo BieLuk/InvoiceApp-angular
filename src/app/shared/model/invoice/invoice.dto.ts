@@ -2,6 +2,7 @@ import {UserSimpleDto} from '../user/user-dto';
 import {ClientDto} from '../client/client-dto';
 import {PaymentTypeDto} from './payment-type.dto';
 import {InvoiceTypeDto} from './invoice-type.dto';
+import {InvoicePositionDto} from './invoice-position.dto';
 
 export interface InvoiceDto {
   id: number;
@@ -15,4 +16,5 @@ export interface InvoiceDto {
   paymentType: PaymentTypeDto;
   invoiceType: InvoiceTypeDto;
   client: ClientDto;
+  invoicePositions: InvoicePositionDto[];
 }

@@ -23,7 +23,8 @@ export class InvoiceMapperService {
       grossValue: dto.grossValue,
       paymentType: dto.paymentType,
       invoiceType: dto.invoiceType,
-      client: dto.client
+      client: dto.client,
+      invoicePositions: dto.invoicePositions
     };
   }
 
@@ -32,24 +33,17 @@ export class InvoiceMapperService {
       id: model.id,
       invoiceNumber: model.invoiceNumber,
       user: model.user,
-      createDate: model.createDate.toString(),
-      saleDate: model.saleDate.toString(),
-      paymentDate: model.paymentDate.toString(),
+      createDate: model.createDate,
+      saleDate: model.saleDate,
+      paymentDate: model.paymentDate,
       netValue: model.netValue,
       grossValue: model.grossValue,
       paymentType: model.paymentType,
       invoiceType: model.invoiceType,
-      client: model.client
+      client: model.client,
+      invoicePositions: model.invoicePositions
+
     };
   }
 
-  toNgbDateStruct(stringDate: string) {
-    // const stringDateYear = stringDate.substr(0, 4);
-    // const stringDate = stringDate.substr(0, 4);
-    //
-    // const date: NgbDateStruct = {
-    //   day = stringDate.sub
-    // }
-
-  }
 }

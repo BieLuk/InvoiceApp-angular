@@ -4,7 +4,9 @@ import {Injectable} from '@angular/core';
 const I18N_VALUES = {
   'pl': {
     weekdays: ['Pn', 'Wt', 'Śr', 'Cz', 'Pt', 'So', 'Nd'],
-    months: ['Sty', 'Lut', 'Mar', 'Kwi', 'Maj', 'Cze', 'Lip', 'Sie', 'Wrz', 'Paź', 'Lis', 'Gru'],
+    months: ['Styczeń', 'Luty', 'Marzec', 'Kwiecień', 'Maj', 'Czerwiec',
+      'Lipiec', 'Sierpień', 'Wrzesień', 'Październik', 'Listopad', 'Grudzień'],
+    monthsShort: ['Sty', 'Lut', 'Mar', 'Kwi', 'Maj', 'Cze', 'Lip', 'Sie', 'Wrz', 'Paź', 'Lis', 'Gru'],
   }
 };
 
@@ -16,7 +18,7 @@ export class PolishDatepickerI18n extends NgbDatepickerI18n {
     return I18N_VALUES[this.language].weekdays[weekday - 1];
   }
   getMonthShortName(month: number): string {
-    return I18N_VALUES[this.language].months[month - 1];
+    return I18N_VALUES[this.language].monthsShort[month - 1];
   }
   getMonthFullName(month: number): string {
     return this.getMonthShortName(month);
