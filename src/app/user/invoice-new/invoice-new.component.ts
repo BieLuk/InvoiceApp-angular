@@ -18,6 +18,7 @@ import {InvoiceMapperService} from '../../shared/service/invoice/invoice-mapper.
 import {InvoiceTypeModel} from '../../shared/model/invoice/invoice-type.model';
 import {AuthApiService} from '../../shared/service/authentication/auth-api.service';
 import {PolishDatepickerParserFormatter} from '../../shared/datepicker/PolishDatepickerParserFormatter';
+import {InvoiceVatModel} from '../../shared/model/invoice/invoice-vat.model';
 
 
 @Component({
@@ -38,6 +39,7 @@ export class InvoiceNewComponent implements OnInit {
   paymentTypes: PaymentTypeModel[];
   vatTypes: VatTypeModel[];
   invoicePositions: InvoicePositionModel[] = [];
+  invoiceVats: InvoiceVatModel[] = [];
 
   createDateInvoice: NgbDateStruct;
   saleDateInvoice: NgbDateStruct;
@@ -61,6 +63,18 @@ export class InvoiceNewComponent implements OnInit {
 
   changeEditInvoiceNumberMode() {
     this.editInvoiceNumberMode = !this.editInvoiceNumberMode;
+  }
+
+  saveInvoice() {
+    this.invoice.user = this.authApiService.currentUserValue.userDTO;
+    this.invoice.invoicePositions = this.invoicePositions;
+    this.invoice.invoiceVats = this.invoiceVats;
+    this.invoiceApiService.createInvoice(this.invoiceMapperService.mapModelToDto(this.invoice))
+      .subscribe(
+        () => {
+          // TODO toastr, navigate
+        }
+      );
   }
 
   private loadClients() {
@@ -90,19 +104,13 @@ export class InvoiceNewComponent implements OnInit {
     });
   }
 
-  saveInvoice() {
-    this.invoice.user = this.authApiService.currentUserValue.userDTO;
-    this.invoice.invoicePositions = this.invoicePositions;
-    this.invoiceApiService.createInvoice(this.invoiceMapperService.mapModelToDto(this.invoice))
-      .subscribe(
-        () => {
-          // TODO toastr, navigate
-        }
-      );
-  }
-
   addInvoicePosition() {
     this.invoicePositions.push(this.initInvoicePositionModel());
+  }
+
+  removeLastInvoicePosition() {
+    this.invoicePositions.pop();
+    this.calculateInvoiceVat();
   }
 
   calculateNetValue(quantity: number, netPrice: number) {
@@ -135,6 +143,67 @@ export class InvoiceNewComponent implements OnInit {
     return netValue.toFixed(2);
   }
 
+  calculateInvoiceVatAmount() {
+    let vatValue = 0;
+    this.invoicePositions.forEach(position => vatValue += +position.vatValue);
+
+    return vatValue.toFixed(2);
+  }
+
+  calculateInvoiceVat() {
+    let vatTypeFounded: boolean;
+    this.invoiceVats = [];
+
+    for (const position of this.invoicePositions) {
+      vatTypeFounded = false;
+      if (this.invoiceVats.length !== 0) {
+        for (const vat of this.invoiceVats) {
+          if (vat.vatType === position.vatType) {
+            vat.netValue = Number((+vat.netValue + +position.netValue).toFixed(2));
+            vat.vatValue = Number((+vat.vatValue + +position.vatValue).toFixed(2));
+            vat.grossValue = Number((+vat.grossValue + +position.grossValue).toFixed(2));
+            vatTypeFounded = true;
+            break;
+          }
+        }
+        if (vatTypeFounded !== true) {
+          const invoiceVatElem: InvoiceVatModel = this.initInvoiceVatModel();
+          invoiceVatElem.netValue = position.netValue;
+          invoiceVatElem.vatType = position.vatType;
+          invoiceVatElem.grossValue = position.grossValue;
+          invoiceVatElem.vatValue = position.vatValue;
+          this.invoiceVats.push(invoiceVatElem);
+        }
+      } else {
+        const invoiceVatElem: InvoiceVatModel = this.initInvoiceVatModel();
+        invoiceVatElem.netValue = position.netValue;
+        invoiceVatElem.vatType = position.vatType;
+        invoiceVatElem.grossValue = position.grossValue;
+        invoiceVatElem.vatValue = position.vatValue;
+        this.invoiceVats.push(invoiceVatElem);
+      }
+    }
+  }
+
+  private initVatTypeModel(): VatTypeModel {
+    return {
+      id: 1,
+      name: '23%',
+      value: 0.23
+    };
+  }
+
+  private initInvoiceVatModel(): InvoiceVatModel {
+    return {
+      id: undefined,
+      vatValue: 0,
+      vatType: this.initVatTypeModel(),
+      netValue: 0,
+      grossValue: 0
+    };
+  }
+
+
   private initInvoiceTypeModel(): InvoiceTypeModel {
     return {
       id: 1,
@@ -153,10 +222,12 @@ export class InvoiceNewComponent implements OnInit {
       paymentDate: undefined,
       netAmount: 0,
       grossAmount: 0,
+      vatAmount: 0,
       paymentType: undefined,
       invoiceVersion: this.initInvoiceTypeModel(),
       client: undefined,
-      invoicePositions: undefined
+      invoicePositions: undefined,
+      invoiceVats: undefined
     };
   }
 
@@ -197,7 +268,5 @@ export class InvoiceNewComponent implements OnInit {
       `${dayNo}-${monthNo}-${date.year.toString(10)}` : '';
   }
 
-  removeLastInvoicePosition() {
-    this.invoicePositions.pop();
-  }
+
 }

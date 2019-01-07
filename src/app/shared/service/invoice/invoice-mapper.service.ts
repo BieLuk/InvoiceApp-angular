@@ -21,10 +21,12 @@ export class InvoiceMapperService {
       paymentDate: dto.paymentDate,
       netAmount: dto.netAmount,
       grossAmount: dto.grossAmount,
+      vatAmount: dto.vatAmount,
       paymentType: dto.paymentType,
       invoiceVersion: dto.invoiceVersion,
       client: dto.client,
-      invoicePositions: dto.invoicePositions
+      invoicePositions: dto.invoicePositions,
+      invoiceVats: dto.invoiceVats
     };
   }
 
@@ -38,11 +40,12 @@ export class InvoiceMapperService {
       paymentDate: model.paymentDate,
       netAmount: model.netAmount,
       grossAmount: model.grossAmount,
+      vatAmount: model.vatAmount,
       paymentType: model.paymentType,
       invoiceVersion: model.invoiceVersion,
       client: model.client,
-      invoicePositions: model.invoicePositions
-
+      invoicePositions: model.invoicePositions,
+      invoiceVats: model.invoiceVats
     };
   }
 

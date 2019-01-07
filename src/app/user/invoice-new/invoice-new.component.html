@@ -101,16 +101,16 @@
                   <input id="position_unit" name="position_unit" #positionUnit class="form-control" [(ngModel)]="position.unit" />
                 </div>
                 <div class="col-1">
-                  <input id="position_quantity" name="position_quantity" #positionQuantity class="form-control" [(ngModel)]="position.quantity" (ngModelChange)="position.netValue = calculateNetValue(position.quantity, position.netPrice); position.vatValue = calculateVatAmount(position.netValue, position.vatType.value); position.grossValue = calculateGrossValue(position.netValue, position.vatValue); invoice.grossAmount = calculateInvoiceGrossAmount(); invoice.netAmount = calculateInvoiceNetAmount()" />
+                  <input id="position_quantity" name="position_quantity" #positionQuantity class="form-control" [(ngModel)]="position.quantity" (ngModelChange)="position.netValue = calculateNetValue(position.quantity, position.netPrice); position.vatValue = calculateVatAmount(position.netValue, position.vatType.value); position.grossValue = calculateGrossValue(position.netValue, position.vatValue); invoice.grossAmount = calculateInvoiceGrossAmount(); invoice.netAmount = calculateInvoiceNetAmount(); invoice.vatAmount = calculateInvoiceVatAmount(); calculateInvoiceVat()" />
                 </div>
                 <div class="col-1">
-                  <input id="position_netPrice" name="position_netPrice" #positionNetPrice class="form-control" [(ngModel)]="position.netPrice" (ngModelChange)="position.netValue = calculateNetValue(position.quantity, position.netPrice); position.vatValue = calculateVatAmount(position.netValue, position.vatType.value); position.grossValue = calculateGrossValue(position.netValue, position.vatValue); invoice.grossAmount = calculateInvoiceGrossAmount(); invoice.netAmount = calculateInvoiceNetAmount()" />
+                  <input id="position_netPrice" name="position_netPrice" #positionNetPrice class="form-control" [(ngModel)]="position.netPrice" (ngModelChange)="position.netValue = calculateNetValue(position.quantity, position.netPrice); position.vatValue = calculateVatAmount(position.netValue, position.vatType.value); position.grossValue = calculateGrossValue(position.netValue, position.vatValue); invoice.grossAmount = calculateInvoiceGrossAmount(); invoice.netAmount = calculateInvoiceNetAmount(); invoice.vatAmount = calculateInvoiceVatAmount(); calculateInvoiceVat()" />
                 </div>
                 <div class="col-1">
-                  <input id="position_netValue" name="position_netValue" #positionNetValue class="form-control" [(ngModel)]="position.netValue"  (ngModelChange)="position.netPrice = calculateNetPrice(position.netValue, position.quantity); position.vatValue = calculateVatAmount(position.netValue, position.vatType.value); position.grossValue = calculateGrossValue(position.netValue, position.vatValue); invoice.grossAmount = calculateInvoiceGrossAmount(); invoice.netAmount = calculateInvoiceNetAmount()"/>
+                  <input id="position_netValue" name="position_netValue" #positionNetValue class="form-control" [(ngModel)]="position.netValue"  (ngModelChange)="position.netPrice = calculateNetPrice(position.netValue, position.quantity); position.vatValue = calculateVatAmount(position.netValue, position.vatType.value); position.grossValue = calculateGrossValue(position.netValue, position.vatValue); invoice.grossAmount = calculateInvoiceGrossAmount(); invoice.netAmount = calculateInvoiceNetAmount(); invoice.vatAmount = calculateInvoiceVatAmount(); calculateInvoiceVat()"/>
                 </div>
                 <div class="col-1">
-                  <select id="position_vatType" name="position_vatType" #positionVatType class="form-control"   [(ngModel)]="position.vatType" (ngModelChange)="position.vatValue = calculateVatAmount(position.netValue, position.vatType.value); position.grossValue = calculateGrossValue(position.netValue, position.vatValue); invoice.grossValue = calculateInvoiceGrossAmount(); invoice.netValue = calculateInvoiceNetAmount()">
+                  <select id="position_vatType" name="position_vatType" #positionVatType class="form-control"   [(ngModel)]="position.vatType" (ngModelChange)="position.vatValue = calculateVatAmount(position.netValue, position.vatType.value); position.grossValue = calculateGrossValue(position.netValue, position.vatValue); invoice.grossValue = calculateInvoiceGrossAmount(); invoice.netValue = calculateInvoiceNetAmount(); invoice.vatAmount = calculateInvoiceVatAmount(); calculateInvoiceVat()">
                     <option *ngFor="let vatType of vatTypes" [ngValue]="vatType">{{vatType.name}}</option>
                   </select>
 
@@ -131,6 +131,30 @@
             <button type="button" class="btn btn-danger  mt-3 mr-3" [disabled]="invoicePositions.length <= 1" (click)="removeLastInvoicePosition()"><i class="fas fa-minus"></i> Usuń ostatnie pole</button>
 
           </div>
+
+          <hr />
+            <div class="row">
+              <div class="col-5"></div>
+              <div class="col-1"></div>
+              <div class="col-1"></div>
+              <div class="col-1">Razem:</div>
+              <div class="col-1">{{invoice.netAmount}}</div>
+              <div class="col-1">-</div>
+              <div class="col-1">{{invoice.vatAmount}}</div>
+              <div class="col-1">{{invoice.grossAmount}}</div>
+            </div>
+
+            <div class="row" *ngFor="let invoiceVat of invoiceVats">
+              <div class="col-5"></div>
+              <div class="col-1"></div>
+              <div class="col-1"></div>
+              <div class="col-1" *ngIf="invoiceVat == invoiceVats[0]">W tym</div>
+              <div class="col-1" *ngIf="invoiceVat != invoiceVats[0]"></div>
+              <div class="col-1">{{invoiceVat.netValue}}</div>
+              <div class="col-1">{{invoiceVat.vatType.name}}</div>
+              <div class="col-1">{{invoiceVat.vatValue}}</div>
+              <div class="col-1">{{invoiceVat.grossValue}}</div>
+            </div>
 
           <hr />
 
