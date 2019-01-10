@@ -11,10 +11,11 @@
             <table datatable [dtOptions]="dtOptions" class="row-border hover">
               <thead>
               <tr>
-                <th>Nazwa firmy</th>
+                <th style="width: 500px;">Nazwa firmy</th>
                 <th>Adres email</th>
                 <th>Telefon</th>
-                <th></th>
+                <th style="width: 50px;"></th>
+                <th style="width: 50px;"></th>
                 <th class="none">NIP</th>
                 <th class="none">Miejscowość</th>
                 <th class="none">Ulica</th>
@@ -29,6 +30,7 @@
                 <td>{{ client.email }}</td>
                 <td>{{ client.phone }}</td>
                 <td><button type="button" class="btn btn-outline-info" (click)="navigateToClientDetailsEdit(client.id)">Edytuj</button></td>
+                <td><button type="button" class="btn btn-danger" (click)="deleteClient(client.id)">Usuń</button></td>
                 <td class="none">{{client.nip}}</td>
                 <td class="none">{{client.city}}</td>
                 <td class="none">{{client.street}}</td>

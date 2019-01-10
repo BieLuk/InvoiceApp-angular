@@ -11,7 +11,7 @@
           <div class="card-body">
             <div class="row">
               <div class="col-6">
-                <span class="invoice-description-item">KLIENT</span>
+                <span class="invoice-description-ivetem">KLIENT</span>
                 <hr />
                 <p class="invoice-item">{{invoice.client.name}}</p>
                 <p class="invoice-item">{{invoice.client.street}}</p>
@@ -95,6 +95,9 @@
               </div>
             </div>
           </div>
+        </div>
+        <div class="d-flex justify-content-end mt-1 mb-3">
+          <button type="button" class="btn btn-danger" (click)="deleteInvoice()">Usuń fakturę</button>
         </div>
 
       </div>

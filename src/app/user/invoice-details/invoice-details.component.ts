@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {InvoiceApiService} from '../../shared/service/invoice/invoice-api.service';
 import {InvoiceMapperService} from '../../shared/service/invoice/invoice-mapper.service';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {map} from 'rxjs/operators';
 import {InvoiceModel} from '../../shared/model/invoice/invoice.model';
 
@@ -17,7 +17,8 @@ export class InvoiceDetailsComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
               private invoiceApiService: InvoiceApiService,
-              private invoiceMapperService: InvoiceMapperService) { }
+              private invoiceMapperService: InvoiceMapperService,
+              private router: Router) { }
 
   ngOnInit() {
     this.invoiceId = this.route.snapshot.queryParams['id'];
@@ -29,8 +30,16 @@ export class InvoiceDetailsComponent implements OnInit {
       map(response => response.data),
       map(invoiceDto => this.invoiceMapperService.mapDtoToModel(invoiceDto))
     ).subscribe(invoice => this.invoice = invoice);
-
   }
+
+  deleteInvoice() {
+    this.invoiceApiService.deleteInvoice(this.invoiceId).pipe(
+      map(response => response.data)
+    ).subscribe(
+      () => this.router.navigate(['user/invoices'])
+    );
+  }
+
 
   generatePdf() {
     const fileName = this.invoice.invoiceNumber + '_' + this.invoice.client.name + '.pdf';
@@ -49,7 +58,5 @@ export class InvoiceDetailsComponent implements OnInit {
           document.body.removeChild(link);
       }
     });
-
   }
-
 }

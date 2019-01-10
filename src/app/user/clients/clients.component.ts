@@ -46,14 +46,14 @@ export class ClientsComponent implements OnInit {
       },
       columnDefs: [
         {
-          targets: [0],
-          width: '55%',
-        },
-        {
           targets: [3],
           orderable: false,
           searchable: false,
-          width: '50px'
+        },
+        {
+          targets: [4],
+          orderable: false,
+          searchable: false,
         },
       ],
       order: [[0, 'asc']],
@@ -75,6 +75,14 @@ export class ClientsComponent implements OnInit {
 
   navigateToClientDetailsEdit(clientId: number) {
     this.router.navigate(['user', 'clients', 'edit'], {queryParams: { id: clientId}});
+  }
+
+  deleteClient(clientId: number) {
+    this.clientApiService.deleteClient(clientId).pipe(
+      map(response => response.data)
+    ).subscribe(
+      () => this.loadClients()
+      );
   }
 
 }

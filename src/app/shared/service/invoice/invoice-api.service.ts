@@ -4,7 +4,6 @@ import {Observable} from 'rxjs';
 import {InvoiceDto} from '../../model/invoice/invoice.dto';
 import {ListResponse, SingleResponse} from '../../model/response.model';
 import {AppConstants} from '../../../app-constants';
-import {RequestOptions, ResponseContentType} from '@angular/http';
 
 
 @Injectable({
@@ -15,7 +14,8 @@ export class InvoiceApiService {
   constructor(private http: HttpClient) { }
 
   getInvoicesByUserId(userId: number): Observable<ListResponse<InvoiceDto>> {
-    return this.http.get<ListResponse<InvoiceDto>>(AppConstants.API_ENDPOINT + '/invoices', { params: { userId: userId.toString()}});
+    return this.http.get<ListResponse<InvoiceDto>>(AppConstants.API_ENDPOINT + '/invoices',
+      { params: { userId: userId.toString()}});
   }
 
   createInvoice(invoice: InvoiceDto): Observable<SingleResponse<InvoiceDto>> {
@@ -30,6 +30,11 @@ export class InvoiceApiService {
   generateInvoicePdf(invoiceId: number) {
     return this.http.get(AppConstants.API_ENDPOINT + '/invoices/pdf',
       { params: { invoiceId: invoiceId.toString()}, responseType: 'blob'});
+  }
+
+  deleteInvoice(invoiceId: number): Observable<SingleResponse<Boolean>> {
+    return this.http.delete<SingleResponse<Boolean>>(AppConstants.API_ENDPOINT + '/invoices/delete',
+      { params: {invoiceId: invoiceId.toString()}});
   }
 
 

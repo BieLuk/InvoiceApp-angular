@@ -13,7 +13,8 @@ export class ClientApiService {
   constructor(private http: HttpClient) { }
 
   getClientsByUserId(userId: number): Observable<ListResponse<ClientDto>> {
-    return this.http.get<ListResponse<ClientDto>>(AppConstants.API_ENDPOINT + '/clients', { params: { userId: userId.toString()}});
+    return this.http.get<ListResponse<ClientDto>>(AppConstants.API_ENDPOINT + '/clients',
+      { params: { userId: userId.toString()}});
   }
 
   createClient(client: ClientDto): Observable<SingleResponse<ClientDto>> {
@@ -21,12 +22,19 @@ export class ClientApiService {
   }
 
   getClientDetailsById(clientId: number): Observable<SingleResponse<ClientDto>> {
-    return this.http.get<SingleResponse<ClientDto>>(AppConstants.API_ENDPOINT + '/clients/client', { params: { clientId: clientId.toString() }});
+    return this.http.get<SingleResponse<ClientDto>>(AppConstants.API_ENDPOINT + '/clients/client',
+      { params: { clientId: clientId.toString() }});
   }
 
   updateClient(client: ClientDto): Observable<SingleResponse<ClientDto>> {
     return this.http.put<SingleResponse<ClientDto>>(AppConstants.API_ENDPOINT + '/clients/client', client);
   }
+
+  deleteClient(clientId: number): Observable<SingleResponse<Boolean>> {
+    return this.http.delete<SingleResponse<Boolean>>(AppConstants.API_ENDPOINT + '/clients/delete',
+      { params: { clientId: clientId.toString()}});
+  }
+
 
 
 
