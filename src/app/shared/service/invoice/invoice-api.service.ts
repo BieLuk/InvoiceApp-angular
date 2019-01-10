@@ -4,6 +4,7 @@ import {Observable} from 'rxjs';
 import {InvoiceDto} from '../../model/invoice/invoice.dto';
 import {ListResponse, SingleResponse} from '../../model/response.model';
 import {AppConstants} from '../../../app-constants';
+import {RequestOptions, ResponseContentType} from '@angular/http';
 
 
 @Injectable({
@@ -24,6 +25,11 @@ export class InvoiceApiService {
   getInvoiceDetailsById(invoiceId: number): Observable<SingleResponse<InvoiceDto>> {
     return this.http.get<SingleResponse<InvoiceDto>>(AppConstants.API_ENDPOINT + '/invoices/invoice',
       { params: { invoiceId: invoiceId.toString() }});
+  }
+
+  generateInvoicePdf(invoiceId: number) {
+    return this.http.get(AppConstants.API_ENDPOINT + '/invoices/pdf',
+      { params: { invoiceId: invoiceId.toString()}, responseType: 'blob'});
   }
 
 

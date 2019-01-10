@@ -32,4 +32,24 @@ export class InvoiceDetailsComponent implements OnInit {
 
   }
 
+  generatePdf() {
+    const fileName = this.invoice.invoiceNumber + '_' + this.invoice.client.name + '.pdf';
+    this.invoiceApiService.generateInvoicePdf(this.invoiceId).subscribe((blob: Blob) => {
+
+      if (navigator.msSaveBlob) {
+        navigator.msSaveBlob(blob, fileName);
+      } else {
+        const link = document.createElement('a');
+          const url = URL.createObjectURL(blob);
+          link.setAttribute('href', url);
+          link.setAttribute('download', fileName);
+          link.style.visibility = 'hidden';
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+      }
+    });
+
+  }
+
 }

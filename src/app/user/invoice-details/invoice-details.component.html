@@ -4,11 +4,13 @@
       <div *ngIf="invoice">
         <div class="d-flex justify-content-between">
           <h3><i class="fas fa-file-alt "></i> Faktura {{invoice.invoiceNumber}}</h3>
+          <button type="button" class="btn btn-info mb-1" style="width: 100px;" (click)="generatePdf()">PDF</button>
         </div>
+
         <div class="card">
           <div class="card-body">
             <div class="row">
-              <div class="col">
+              <div class="col-6">
                 <span class="invoice-description-item">KLIENT</span>
                 <hr />
                 <p class="invoice-item">{{invoice.client.name}}</p>
@@ -16,7 +18,7 @@
                 <p class="invoice-item">{{invoice.client.postcode}} {{invoice.client.city}}</p>
                 <p class="invoice-item"><span class="invoice-description-item">NIP: </span>{{invoice.client.nip}}</p>
               </div>
-              <div class="col">
+              <div class="col-3">
                 <span class="invoice-description-item">TERMINY</span>
                 <hr />
                 <p class="invoice-item"><span class="invoice-description-item">Data wystawienia: </span>{{invoice.createDate}}</p>
@@ -24,7 +26,14 @@
                 <p class="invoice-item"><span class="invoice-description-item">Termin zapłaty: </span>{{invoice.paymentDate}}</p>
               </div>
 
-            </div>
+              <div class="col-3">
+                <span class="invoice-description-item">PŁATNOŚĆ</span>
+                <hr />
+                <p class="invoice-item"><span class="invoice-description-item">Sposób zapłaty: </span>{{invoice.paymentType.name}}</p>
+              </div>
+
+
+          </div>
             <div class="row">
               <div class="col">
                 <div class="card-header mb-4">
@@ -59,18 +68,18 @@
                   <div class="col-4 ml-3"></div>
                   <div class="col-1"></div>
                   <div class="col-1"></div>
-                  <div class="col-1">Razem:</div>
-                  <div class="col-1">{{invoice.netAmount}}</div>
+                  <div class="col-1 font-weight-bold">Razem:</div>
+                  <div class="col-1 font-weight-bold">{{invoice.netAmount}}</div>
                   <div class="col-1">-</div>
-                  <div class="col-1">{{invoice.vatAmount}}</div>
-                  <div class="col-1">{{invoice.grossAmount}}</div>
+                  <div class="col-1 font-weight-bold">{{invoice.vatAmount}}</div>
+                  <div class="col-1 font-weight-bold">{{invoice.grossAmount}}</div>
                 </div>
 
                 <div class="row" *ngFor="let invoiceVat of invoice.invoiceVats">
                   <div class="col-4 ml-3"></div>
                   <div class="col-1"></div>
                   <div class="col-1"></div>
-                  <div class="col-1" *ngIf="invoiceVat == invoice.invoiceVats[0]">W tym</div>
+                  <div class="col-1 font-weight-bold" *ngIf="invoiceVat == invoice.invoiceVats[0]">W tym</div>
                   <div class="col-1" *ngIf="invoiceVat != invoice.invoiceVats[0]"></div>
                   <div class="col-1">{{invoiceVat.netValue}}</div>
                   <div class="col-1">{{invoiceVat.vatType.name}}</div>
@@ -81,14 +90,7 @@
 
 
                 <div class="row">
-                  <div class="col-4 ml-3"></div>
-                  <div class="col-1"></div>
-                  <div class="col-1"></div>
-                  <div class="col-1 font-weight-bold" style="text-align: right;">Razem</div>
-                  <div class="col-1 font-weight-bold">{{invoice.netAmount}}</div>
-                  <div class="col-1"></div>
-                  <div class="col-1"></div>
-                  <div class="col-1 font-weight-bold">{{invoice.grossAmount}}</div>
+                  <div class="col-11 ml-3" style="text-align: right;">Razem: <span class="font-weight-bold h5">{{invoice.grossAmount}}</span></div>
                 </div>
               </div>
             </div>
