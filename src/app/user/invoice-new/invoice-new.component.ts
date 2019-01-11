@@ -19,6 +19,7 @@ import {InvoiceTypeModel} from '../../shared/model/invoice/invoice-type.model';
 import {AuthApiService} from '../../shared/service/authentication/auth-api.service';
 import {PolishDatepickerParserFormatter} from '../../shared/datepicker/PolishDatepickerParserFormatter';
 import {InvoiceVatModel} from '../../shared/model/invoice/invoice-vat.model';
+import {Router} from '@angular/router';
 
 
 @Component({
@@ -53,7 +54,8 @@ export class InvoiceNewComponent implements OnInit {
               private vatTypeMapperService: VatTypeMapperService,
               private invoiceApiService: InvoiceApiService,
               private invoiceMapperService: InvoiceMapperService,
-              private authApiService: AuthApiService) { }
+              private authApiService: AuthApiService,
+              private router: Router) { }
 
   ngOnInit() {
     this.loadClients();
@@ -72,7 +74,7 @@ export class InvoiceNewComponent implements OnInit {
     this.invoiceApiService.createInvoice(this.invoiceMapperService.mapModelToDto(this.invoice))
       .subscribe(
         () => {
-          // TODO toastr, navigate
+          this.router.navigate(['user', 'invoices']);
         }
       );
   }

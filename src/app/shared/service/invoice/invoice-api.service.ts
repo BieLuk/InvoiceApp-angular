@@ -18,6 +18,11 @@ export class InvoiceApiService {
       { params: { userId: userId.toString()}});
   }
 
+  getFirst5InvoicesByUserId(userId: number): Observable<ListResponse<InvoiceDto>> {
+    return this.http.get<ListResponse<InvoiceDto>>(AppConstants.API_ENDPOINT + '/invoices/recent',
+      { params: { userId: userId.toString()}});
+  }
+
   createInvoice(invoice: InvoiceDto): Observable<SingleResponse<InvoiceDto>> {
     return this.http.post<SingleResponse<InvoiceDto>>(AppConstants.API_ENDPOINT + '/invoices', invoice);
   }

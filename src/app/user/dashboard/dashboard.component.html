@@ -10,16 +10,13 @@
               <ul class="list-group list-group-flush">
                 <li class="list-group-item list-group-item">
                   <div class="action-icon">
-                    <a class="" routerLink="#"><i class="fas fa-file-alt fa-2x"></i> Dodaj fakturę</a>
+                    <a class="" routerLink="/user/invoices/new"><i class="fas fa-file-alt fa-2x"></i> Dodaj fakturę</a>
                   </div>
                 </li>
                 <li class="list-group-item list-group-item">
                   <div class="action-icon">
                     <a class="" routerLink="/user/clients/new"><i class="fas fa-user-tie fa-2x"></i> Dodaj klienta</a>
                   </div>
-                </li>
-                <li class="list-group-item list-group-item">
-                    <a routerLink="#"><i class="fas fa-file-invoice fa-2x"></i> Dodaj szablon faktury</a>
                 </li>
 
               </ul>
@@ -36,31 +33,39 @@
 
 
     <div class="col-9 pr-5">
-      <div class="flex-row mb-3">
-        <div class="card">
-          <div class="card-header"><h4>Zapisane szablony:</h4></div>
-          <div class="card-body">
-            test test
-          </div>
-        </div>
-      </div>
+      <!--<div class="flex-row mb-3">-->
+        <!--<div class="card">-->
+          <!--<div class="card-header"><h4>Zapisane szablony:</h4></div>-->
+          <!--<div class="card-body">-->
+            <!--test test-->
+          <!--</div>-->
+        <!--</div>-->
+      <!--</div>-->
 
       <div class="flex-row">
-        <div class="card">
+        <div class="card" *ngIf="invoices">
           <div class="card-header"><h4>Ostatnie faktury:</h4></div>
           <div class="card-body">
-            <table>
-              <thead>
+            <table class="table table-bordered table-striped ">
+              <thead class="">
                 <tr>
                   <th>Numer</th>
                   <th>Nazwa klienta</th>
                   <th>Data wystawienia</th>
                   <th>Rodzaj dokumentu</th>
                   <th>Wartość brutto</th>
+                  <th style="width: 50px;"></th>
                 </tr>
               </thead>
               <tbody>
-
+              <tr *ngFor="let invoice of invoices">
+                <td>{{invoice.invoiceNumber}}</td>
+                <td>{{invoice.client.name}}</td>
+                <td>{{invoice.createDate}}</td>
+                <td>{{invoice.invoiceVersion.name}}</td>
+                <td>{{invoice.grossAmount}}</td>
+                <td><button type="button" class="btn btn-outline-info" (click)="navigateToInvoiceDetails(invoice.id)">Szczegóły</button></td>
+              </tr>
               </tbody>
             </table>
           </div>

@@ -14,8 +14,8 @@ export class JwtInterceptor implements HttpInterceptor {
     // if (currentUser && currentUser.accessToken) {
       request = request.clone({
         setHeaders: {
-          Authorization: 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNTQ2NTUwNzIxLCJleHAiOjE1NDcxNTU1MjF9.' +
-            'DxIf2hClxnbjIdtWMBbjdA2mz6AqPsPD8AqSzO_yK-v4O1daCUiNymZuGGdigT_PTWb9_fFUZDH7RjtIISVLzA' // + currentUser.accessToken
+          Authorization: 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNTQ3MjEyNzg0LCJleHAiOjE1NDc4MTc1ODR9.' +
+            'CXVc_SYQwu7pOvf3ern4YVrPGAaYPBmNiQ42lGcVl2DeU0d7rsD_D7fwKeIBGv1kQuiMThrNUcbOpoik1vzUww' // + currentUser.accessToken
         }
       });
     // }
