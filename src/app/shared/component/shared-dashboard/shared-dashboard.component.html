@@ -1,0 +1,2 @@
+<app-admin-dashboard *ngIf="getUserRole() === 'ROLE_ADMIN'"></app-admin-dashboard>
+<app-user-dashboard *ngIf="getUserRole() === 'ROLE_USER'"></app-user-dashboard>

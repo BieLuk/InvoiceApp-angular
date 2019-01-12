@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {InvoiceApiService} from '../../shared/service/invoice/invoice-api.service';
-import {InvoiceMapperService} from '../../shared/service/invoice/invoice-mapper.service';
+import {InvoiceApiService} from '../../service/invoice/invoice-api.service';
+import {InvoiceMapperService} from '../../service/invoice/invoice-mapper.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {map} from 'rxjs/operators';
-import {InvoiceModel} from '../../shared/model/invoice/invoice.model';
+import {InvoiceModel} from '../../model/invoice/invoice.model';
 
 @Component({
   selector: 'app-invoice-details',

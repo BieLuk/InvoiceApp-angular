@@ -1,0 +1,41 @@
+<div class="d-flex justify-content-between">
+  <h3><i class="fas fa-file-invoice"></i> Faktury</h3>
+</div>
+<div class="card">
+  <div class="card-body">
+    <div *ngIf="invoices">
+      <table datatable [dtOptions]="dtOptions" class="row-border hover">
+        <thead>
+        <tr>
+          <th>Numer</th>
+          <th style="width: 500px;">Nazwa klienta</th>
+          <th>Data Wystawienia</th>
+          <th>Wartość brutto</th>
+          <th style="width:80px;"></th>
+          <th class="none">Data sprzedaży</th>
+          <th class="none">Data płatności</th>
+          <th class="none">Wartość netto</th>
+          <th class="none">Typ faktury</th>
+          <th class="none">Metoda płatności</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let invoice of invoices">
+          <td>{{ invoice.invoiceNumber }}</td>
+          <td>{{ invoice.client.name }}</td>
+          <td>{{ invoice.createDate }}</td>
+          <td>{{ invoice.grossAmount }}</td>
+          <td><button type="button" class="btn btn-outline-info" (click)="navigateToInvoiceDetails(invoice.id)">Szczegóły</button></td>
+          <td class="none">{{invoice.saleDate}}</td>
+          <td class="none">{{invoice.paymentDate}}</td>
+          <td class="none">{{invoice.netAmount}}</td>
+          <td class="none">{{invoice.invoiceVersion.name}}</td>
+          <td class="none">{{invoice.paymentType.name}}</td>
+        </tr>
+
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</div>

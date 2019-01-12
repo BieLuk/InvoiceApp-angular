@@ -4,14 +4,20 @@ import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.compo
 import { AdminRootComponent } from './admin-root.component';
 import {RouterModule} from '@angular/router';
 import {adminModuleRoutes} from './admin-routings';
+import { UsersComponent } from './users/users.component';
+import {DataTablesModule} from 'angular-datatables';
+import { InvoicesComponent } from './invoices/invoices.component';
 
 @NgModule({
   declarations: [
     AdminDashboardComponent,
-    AdminRootComponent
+    AdminRootComponent,
+    UsersComponent,
+    InvoicesComponent
   ],
   imports: [
     CommonModule,
+    DataTablesModule,
     RouterModule.forChild(adminModuleRoutes)
 
   ],

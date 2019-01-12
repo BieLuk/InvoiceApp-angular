@@ -42,6 +42,10 @@ export class InvoiceApiService {
       { params: {invoiceId: invoiceId.toString()}});
   }
 
+  getAllInvoices(): Observable<ListResponse<InvoiceDto>> {
+    return this.http.get<ListResponse<InvoiceDto>>(AppConstants.API_ENDPOINT + '/invoices/all');
+  }
+
 
 
 

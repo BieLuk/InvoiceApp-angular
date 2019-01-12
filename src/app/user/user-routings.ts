@@ -8,7 +8,7 @@ import {UserAuthGuard} from '../shared/guard/UserAuthGuard';
 import {ClientEditComponent} from './client-edit/client-edit.component';
 import {InvoicesComponent} from './invoices/invoices.component';
 import {InvoiceNewComponent} from './invoice-new/invoice-new.component';
-import {InvoiceDetailsComponent} from './invoice-details/invoice-details.component';
+import {InvoiceDetailsComponent} from '../shared/component/invoice-details/invoice-details.component';
 import {AdminAuthGuard} from '../shared/guard/AdminAuthGuard';
 
 export const userModuleRoutes: Routes = [
