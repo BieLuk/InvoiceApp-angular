@@ -12,9 +12,11 @@ export class AuthApiService {
   private currentUserSubject: BehaviorSubject<JwtAuthenticationResponse>;
   public currentUser: Observable<JwtAuthenticationResponse>;
   public currentUserId: number = undefined;
+  public currentUserRole: string = undefined;
 
   constructor(private http: HttpClient) {
     this.currentUserSubject = new BehaviorSubject<JwtAuthenticationResponse>(JSON.parse(localStorage.getItem('currentUser')));
+    this.currentUserId = JSON.parse(localStorage.getItem('currentUserId'));
     this.currentUser = this.currentUserSubject.asObservable();
   }
 
@@ -29,11 +31,11 @@ export class AuthApiService {
   login(userLoginDto: UserLoginDto) {
     return this.http.post<JwtAuthenticationResponse>(AppConstants.API_ENDPOINT + '/auth/signin', userLoginDto)
       .pipe(map(data => {
-        // login successful if there's a jwt token in the response
         if (data && data.accessToken) {
-          // store user details and jwt token in local storage to keep user logged in between page refreshes
           localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
           this.currentUserId = data.userDTO.id;
+          this.currentUserRole = data.userDTO.roles[0].name;
+          localStorage.setItem('currentUserId', JSON.stringify(this.currentUserId));
           this.currentUserSubject.next(data);
         }
 
@@ -42,8 +44,8 @@ export class AuthApiService {
   }
 
   logout() {
-    // remove user from local storage to log user out
     localStorage.removeItem('currentUser');
+    localStorage.removeItem('currentUserId');
     this.currentUserSubject.next(null);
   }
 }

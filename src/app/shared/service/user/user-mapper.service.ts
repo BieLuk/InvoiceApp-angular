@@ -21,7 +21,8 @@ export class UserMapperService {
       city: dto.city,
       nip: dto.nip,
       regon: dto.regon,
-      active: dto.active
+      active: dto.active,
+      roles: dto.roles
     };
   }
 
@@ -37,7 +38,8 @@ export class UserMapperService {
       city: model.city,
       nip: model.nip,
       regon: model.regon,
-      active: model.active
+      active: model.active,
+      roles: model.roles
     };
   }
 
@@ -53,7 +55,8 @@ export class UserMapperService {
       city: dto.city,
       nip: dto.nip,
       regon: dto.regon,
-      active: dto.active
+      active: dto.active,
+      roles: dto.roles
     };
   }
 
@@ -70,7 +73,8 @@ export class UserMapperService {
       city: model.city,
       nip: model.nip,
       regon: model.regon,
-      active: model.active
+      active: model.active,
+      roles: model.roles
     };
   }
 

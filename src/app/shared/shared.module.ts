@@ -8,6 +8,9 @@ import {HttpClientModule} from '@angular/common/http';
 import {RegisterComponent} from './component/register/register.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { AlertComponent } from './component/alert/alert.component';
+import { SharedDashboardComponent } from './component/shared-dashboard/shared-dashboard.component';
+import {UserModule} from '../user/user.module';
+import {AdminModule} from '../admin/admin.module';
 
 @NgModule({
   declarations: [
@@ -15,17 +18,21 @@ import { AlertComponent } from './component/alert/alert.component';
     LoginComponent,
     RegisterComponent,
     AlertComponent,
+    SharedDashboardComponent
   ],
   exports: [
     NavbarComponent,
     LoginComponent,
     RegisterComponent,
+    SharedDashboardComponent
   ],
   imports: [
     CommonModule,
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    UserModule,
+    AdminModule,
     RouterModule.forChild(sharedModuleRoutes)
 
   ]

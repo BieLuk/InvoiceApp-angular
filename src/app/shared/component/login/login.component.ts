@@ -26,20 +26,17 @@ export class LoginComponent implements OnInit {
     private alertService: AlertApiService,
     private authMapperService: AuthMapperService
   ) {
-    // redirect to home if already logged in
     if (this.authenticationService.currentUserValue) {
       this.router.navigate(['']);
     }
   }
 
   ngOnInit() {
-    // get return url from route parameters or default to '/'
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
 
   onSubmit() {
     this.submitted = true;
-    // stop here if form is invalid
 
     this.loading = true;
     this.authenticationService.login(this.authMapperService.mapLoginModelToLoginDto(this.userLoginModel))
@@ -54,7 +51,6 @@ export class LoginComponent implements OnInit {
           this.loading = false;
         });
   }
-
 
 
   private initUserLoginModel(): UserLoginModel {

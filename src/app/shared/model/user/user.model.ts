@@ -1,3 +1,5 @@
+import {RoleModel} from '../role/role-model';
+
 export interface UserModel {
   id: number;
   name: string;
@@ -11,6 +13,7 @@ export interface UserModel {
   nip: string;
   regon: string;
   active: boolean;
+  roles: RoleModel[];
 }
 
 export interface UserSimpleModel {
@@ -25,6 +28,7 @@ export interface UserSimpleModel {
   nip: string;
   regon: string;
   active: boolean;
+  roles: RoleModel[];
 }
 
 export interface UserLoginModel {

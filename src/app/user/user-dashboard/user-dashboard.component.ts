@@ -7,11 +7,11 @@ import {Router} from '@angular/router';
 import {InvoiceModel} from '../../shared/model/invoice/invoice.model';
 
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: [ './dashboard.component.css' ]
+  selector: 'app-user-dashboard',
+  templateUrl: './user-dashboard.component.html',
+  styleUrls: [ './user-dashboard.component.css' ]
 })
-export class DashboardComponent implements OnInit {
+export class UserDashboardComponent implements OnInit {
 
   invoiceId: number;
   invoices: InvoiceModel[];

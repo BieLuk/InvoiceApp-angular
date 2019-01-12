@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
-import {AuthApiService} from '../service/authentication/auth-api.service';
+import { AuthApiService } from '../service/authentication/auth-api.service';
 
 @Injectable({ providedIn: 'root' })
-export class AuthGuard implements CanActivate {
+export class SharedAuthGuard implements CanActivate {
   constructor(
     private router: Router,
     private authApiService: AuthApiService
@@ -11,7 +11,8 @@ export class AuthGuard implements CanActivate {
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     const currentUser = this.authApiService.currentUserValue;
-    if (currentUser) {
+    if (currentUser && currentUser.userDTO && (currentUser.userDTO.roles[0].name === 'ROLE_USER' ||
+      currentUser.userDTO.roles[0].name === 'ROLE_ADMIN' )) {
       return true;
     }
 

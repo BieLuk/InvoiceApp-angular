@@ -1,14 +1,15 @@
 import {Routes} from '@angular/router';
 import {UserRootComponent} from './user-root.component';
-import {DashboardComponent} from './dashboard/dashboard.component';
+import {UserDashboardComponent} from './user-dashboard/user-dashboard.component';
 import {UserSettingsComponent} from './user-settings/user-settings.component';
 import {ClientsComponent} from './clients/clients.component';
 import {ClientNewComponent} from './client-new/client-new.component';
-import {AuthGuard} from '../shared/guard/AuthGuard';
+import {UserAuthGuard} from '../shared/guard/UserAuthGuard';
 import {ClientEditComponent} from './client-edit/client-edit.component';
 import {InvoicesComponent} from './invoices/invoices.component';
 import {InvoiceNewComponent} from './invoice-new/invoice-new.component';
 import {InvoiceDetailsComponent} from './invoice-details/invoice-details.component';
+import {AdminAuthGuard} from '../shared/guard/AdminAuthGuard';
 
 export const userModuleRoutes: Routes = [
   {
@@ -17,51 +18,51 @@ export const userModuleRoutes: Routes = [
     children: [
       {
         path: 'dashboard',
-        component: DashboardComponent,
+        component: UserDashboardComponent,
         pathMatch: 'full',
-        canActivate: [AuthGuard]
+        canActivate: [UserAuthGuard, AdminAuthGuard]
       },
       {
         path: 'settings',
         component: UserSettingsComponent,
         pathMatch: 'full',
-        canActivate: [AuthGuard]
+        canActivate: [UserAuthGuard]
       },
       {
         path: 'invoices',
         component: InvoicesComponent,
         pathMatch: 'full',
-        canActivate: [AuthGuard]
+        canActivate: [UserAuthGuard]
       },
       {
         path: 'invoices/new',
         component: InvoiceNewComponent,
         pathMatch: 'full',
-        canActivate: [AuthGuard]
+        canActivate: [UserAuthGuard]
       },
       {
         path: 'invoices/details',
         component: InvoiceDetailsComponent,
         pathMatch: 'full',
-        canActivate: [AuthGuard]
+        canActivate: [UserAuthGuard]
       },
       {
         path: 'clients',
         component: ClientsComponent,
         pathMatch: 'full',
-        canActivate: [AuthGuard]
+        canActivate: [UserAuthGuard]
       },
       {
         path: 'clients/new',
         component: ClientNewComponent,
         pathMatch: 'full',
-        canActivate: [AuthGuard]
+        canActivate: [UserAuthGuard]
       },
       {
         path: 'clients/edit',
         component: ClientEditComponent,
         pathMatch: 'full',
-        canActivate: [AuthGuard]
+        canActivate: [UserAuthGuard]
       }
     ]
   }

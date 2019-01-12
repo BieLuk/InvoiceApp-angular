@@ -1,3 +1,4 @@
+import {RoleDto} from '../role/role-dto';
 
 export interface UserDto {
   id: number;
@@ -12,6 +13,7 @@ export interface UserDto {
   nip: string;
   regon: string;
   active: boolean;
+  roles: RoleDto[];
 }
 
 export interface UserSimpleDto {
@@ -26,6 +28,7 @@ export interface UserSimpleDto {
   nip: string;
   regon: string;
   active: boolean;
+  roles: RoleDto[];
 }
 
 export interface UserLoginDto {

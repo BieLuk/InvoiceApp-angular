@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {DashboardComponent} from './dashboard/dashboard.component';
+import {UserDashboardComponent} from './user-dashboard/user-dashboard.component';
 import { UserRootComponent } from './user-root.component';
 import {RouterModule} from '@angular/router';
 import {userModuleRoutes} from './user-routings';
@@ -19,7 +19,7 @@ import { InvoiceDetailsComponent } from './invoice-details/invoice-details.compo
 
 @NgModule({
   declarations: [
-    DashboardComponent,
+    UserDashboardComponent,
     UserRootComponent,
     UserSettingsComponent,
     ClientsComponent,
@@ -31,7 +31,7 @@ import { InvoiceDetailsComponent } from './invoice-details/invoice-details.compo
 
   ],
   exports: [
-    DashboardComponent
+    UserDashboardComponent
   ],
   imports: [
     CommonModule,
