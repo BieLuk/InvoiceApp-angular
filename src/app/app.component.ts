@@ -9,6 +9,8 @@ export class AppComponent {
 
 
   constructor() {
+    localStorage.removeItem('currentUser');
+    localStorage.removeItem('currentUserId');
   }
 
 }

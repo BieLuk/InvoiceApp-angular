@@ -13,7 +13,7 @@ import {InvoiceModel} from '../../shared/model/invoice/invoice.model';
 })
 export class UserDashboardComponent implements OnInit {
 
-  invoiceId: number;
+  userId: number;
   invoices: InvoiceModel[];
 
   constructor(private invoiceApiService: InvoiceApiService,
@@ -22,13 +22,13 @@ export class UserDashboardComponent implements OnInit {
               private router: Router) { }
 
   ngOnInit() {
-    this.invoiceId = this.authApiService.currentUserId;
+    this.userId = this.authApiService.currentUserId;
     this.loadFirst5Invoices();
 
   }
 
   private loadFirst5Invoices() {
-    this.invoiceApiService.getFirst5InvoicesByUserId(1).pipe(
+    this.invoiceApiService.getFirst5InvoicesByUserId(this.userId).pipe(
       map(response => response.data),
       map(invoicesDto => invoicesDto
         .map(invoiceDto => this.invoiceMapperService.mapDtoToModel(invoiceDto)))

@@ -16,34 +16,13 @@
                 <input id="email" type="text" class="company-item" [(ngModel)]="clientModel.email" [disabled]="!editUserMode">
               </div>
             </div>
-            <div class="row">
-              <div class="col-5">
-                <p class="company-description-item"><label for="password">Hasło</label></p>
-              </div>
-              <div class="col">
-                <input id="password" type="password" class="company-item" [(ngModel)]="clientModel.password" [disabled]="!editUserMode">
-              </div>
-            </div>
-            <div class="row justify-content-center">
-              <button id="btn-save-user" *ngIf="editUserMode" type="button" class="btn btn-info btn-lg btn-block " style="width: 30%" (click)="saveChanges()">ZAPISZ</button>
-            </div>
-          </div>
-        </div>
-      </div>
 
-      <div class="d-flex justify-content-between">
-        <h3><i class="far fa-building"></i> Dane Twojej firmy</h3>
-        <button type="button" class="btn btn-sm edit-btn" (click)="changeEditCompanyMode()">EDYTUJ</button>
-      </div>
-      <div class="card">
-        <div class="card-body">
-          <div *ngIf="clientModel">
             <div class="row">
               <div class="col-5">
                 <p class="company-description-item"><label for="name">Nazwa firmy</label></p>
               </div>
               <div class="col">
-                <input id="name" type="text" class="company-item" [(ngModel)]="clientModel.name" [disabled]="!editCompanyMode">
+                <input id="name" type="text" class="company-item" [(ngModel)]="clientModel.name" [disabled]="!editUserMode">
               </div>
             </div>
             <div class="row">
@@ -51,7 +30,7 @@
                 <p class="company-description-item"><label for="street">Ulica</label></p>
               </div>
               <div class="col">
-                <input id="street" type="text" class="company-item" [(ngModel)]="clientModel.street" [disabled]="!editCompanyMode">
+                <input id="street" type="text" class="company-item" [(ngModel)]="clientModel.street" [disabled]="!editUserMode">
               </div>
             </div>
             <div class="row">
@@ -59,7 +38,7 @@
                 <p class="company-description-item"><label for="postcode">Kod pocztowy</label></p>
               </div>
               <div class="col">
-                <input id="postcode" type="text" class="company-item" [(ngModel)]="clientModel.postcode" [disabled]="!editCompanyMode">
+                <input id="postcode" type="text" class="company-item" [(ngModel)]="clientModel.postcode" [disabled]="!editUserMode">
               </div>
             </div>
             <div class="row">
@@ -67,7 +46,7 @@
                 <p class="company-description-item"><label for="city">Miejscowość</label></p>
               </div>
               <div class="col">
-                <input id="city" type="text" class="company-item" [(ngModel)]="clientModel.city" [disabled]="!editCompanyMode">
+                <input id="city" type="text" class="company-item" [(ngModel)]="clientModel.city" [disabled]="!editUserMode">
               </div>
             </div>
             <div class="row">
@@ -75,7 +54,7 @@
                 <p class="company-description-item"><label for="nip">NIP</label></p>
               </div>
               <div class="col">
-                <input id="nip" type="text" class="company-item" [(ngModel)]="clientModel.nip" [disabled]="!editCompanyMode">
+                <input id="nip" type="text" class="company-item" [(ngModel)]="clientModel.nip" [disabled]="!editUserMode">
               </div>
             </div>
             <div class="row">
@@ -83,7 +62,7 @@
                 <p class="company-description-item"><label for="regon">REGON</label></p>
               </div>
               <div class="col">
-                <input id="regon" type="text" class="company-item" [(ngModel)]="clientModel.regon" [disabled]="!editCompanyMode">
+                <input id="regon" type="text" class="company-item" [(ngModel)]="clientModel.regon" [disabled]="!editUserMode">
               </div>
             </div>
             <div class="row">
@@ -91,11 +70,11 @@
                 <p class="company-description-item"><label for="phone">Numer telefonu</label></p>
               </div>
               <div class="col">
-                <input id="phone" type="text" class="company-item" [(ngModel)]="clientModel.phone" [disabled]="!editCompanyMode">
+                <input id="phone" type="text" class="company-item" [(ngModel)]="clientModel.phone" [disabled]="!editUserMode">
               </div>
             </div>
             <div class="row justify-content-center">
-              <button id="btn-save-company" *ngIf="editCompanyMode" type="button" class="btn btn-info btn-lg btn-block" style="width: 30%" (click)="saveChanges()">ZAPISZ</button>
+              <button id="btn-save-company" *ngIf="editUserMode" type="button" class="btn btn-info btn-lg btn-block" style="width: 30%" (click)="saveChanges()">ZAPISZ</button>
             </div>
 
           </div>

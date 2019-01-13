@@ -67,7 +67,7 @@ export class ClientsComponent implements OnInit {
 
   // TODO zmienić na this.userId
   private loadClients() {
-    this.clientApiService.getClientsByUserId(1).pipe(
+    this.clientApiService.getClientsByUserId(this.userId).pipe(
       map(response => response.data),
       map(clientsDto => clientsDto
       .map(clientDto => this.clientMapperService.mapDtoToModel(clientDto)))

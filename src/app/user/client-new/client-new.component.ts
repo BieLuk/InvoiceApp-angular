@@ -27,7 +27,7 @@ export class ClientNewComponent implements OnInit {
               private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
-    this.userId = this.route.snapshot.queryParams['id']; // TODO pobrac dane z sesji
+    this.userId = this.route.snapshot.queryParams['id'];
   }
 
   loadInvoiceData(nip) {

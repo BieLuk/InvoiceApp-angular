@@ -16,7 +16,6 @@ import {AuthMapperService} from '../../shared/service/authentication/auth-mapper
 export class UserSettingsComponent implements OnInit {
 
   editUserMode = false;
-  editCompanyMode = false;
 
   userId: number;
   clientModel: UserModel;
@@ -42,19 +41,12 @@ export class UserSettingsComponent implements OnInit {
     this.editUserMode = !this.editUserMode;
   }
 
-  changeEditCompanyMode() {
-    this.editCompanyMode = !this.editCompanyMode;
-  }
-
-  // TODO rozdzielic zmiane hasla od reszty
-  // TODO rozdzielić zapisywanie danych do bazy na oddzielne moduły
 
   saveChanges() {
     this.userApiService.updateUser(this.userMapperService.mapModelToDto(this.clientModel))
       .subscribe(
         () => {
           this.editUserMode = false;
-          this.editCompanyMode = false;
           this.loadUserModel();
         }
       );

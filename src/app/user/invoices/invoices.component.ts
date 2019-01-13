@@ -13,9 +13,9 @@ import {InvoiceMapperService} from '../../shared/service/invoice/invoice-mapper.
 })
 export class InvoicesComponent implements OnInit {
 
-  invoiceId: number;
   invoices: InvoiceModel[];
   dtOptions: any = {};
+  userId: number;
 
   constructor(private invoiceApiService: InvoiceApiService,
               private invoiceMapperService: InvoiceMapperService,
@@ -23,7 +23,7 @@ export class InvoicesComponent implements OnInit {
               private router: Router) { }
 
   ngOnInit() {
-    this.invoiceId = this.authApiService.currentUserId;
+    this.userId = this.authApiService.currentUserId;
     this.loadInvoices();
 
     this.dtOptions = {
@@ -61,7 +61,7 @@ export class InvoicesComponent implements OnInit {
   }
 
   private loadInvoices() {
-    this.invoiceApiService.getInvoicesByUserId(1).pipe(
+    this.invoiceApiService.getInvoicesByUserId(this.userId).pipe(
       map(response => response.data),
       map(invoicesDto => invoicesDto
         .map(invoiceDto => this.invoiceMapperService.mapDtoToModel(invoiceDto)))
