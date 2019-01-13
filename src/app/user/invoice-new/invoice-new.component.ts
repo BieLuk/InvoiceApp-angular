@@ -33,8 +33,10 @@ import {Router} from '@angular/router';
 export class InvoiceNewComponent implements OnInit {
 
   editInvoiceNumberMode = false;
+  userId: number;
 
   invoice = this.initInvoiceModel();
+  invoices: InvoiceModel[];
 
   clients: ClientModel[];
   paymentTypes: PaymentTypeModel[];
@@ -58,6 +60,8 @@ export class InvoiceNewComponent implements OnInit {
               private router: Router) { }
 
   ngOnInit() {
+    this.userId = this.authApiService.currentUserId;
+    this.calculateInvoiceNumber();
     this.loadClients();
     this.loadPaymentTypes();
     this.loadVatTypes();
@@ -268,6 +272,37 @@ export class InvoiceNewComponent implements OnInit {
     const monthNo = month.length === 1 ? `0${month}` : month;
     return date ?
       `${dayNo}-${monthNo}-${date.year.toString(10)}` : '';
+  }
+
+  calculateInvoiceNumber(): void {
+    const currentDate = new Date();
+    let currentMonth: string;
+    if (currentDate.getMonth() < 9) {
+      currentMonth = '0' + (currentDate.getMonth() + 1).toString();
+    } else {
+      currentMonth = (currentDate.getMonth() + 1).toString();
+    }
+    const currentYear =  currentDate.getFullYear().toString();
+    let invoiceNo = 0;
+    this.invoiceApiService.getInvoicesByUserId(this.userId).pipe(
+      map(response => response.data),
+      map(invoicesDto => invoicesDto
+        .map(invoiceDto => this.invoiceMapperService.mapDtoToModel(invoiceDto)))
+    ).subscribe(invoices => {
+      this.invoices = invoices;
+      this.invoices.forEach(invoice => {
+        const invoiceMonth = invoice.createDate.substr(3, 2);
+        const invoiceYear = invoice.createDate.substr(6, 4);
+       if (invoiceMonth === currentMonth && invoiceYear === currentYear) {
+         invoiceNo++;
+       }
+      });
+      if (invoiceNo !== 0) {
+        this.invoice.invoiceNumber = (invoiceNo + 1).toString() + '/' + currentMonth + '/' + currentYear;
+      } else {
+        this.invoice.invoiceNumber = '01/' + currentMonth + '/' + currentYear;
+      }
+    });
   }
 
 
