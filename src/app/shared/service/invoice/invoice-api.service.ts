@@ -4,6 +4,7 @@ import {Observable} from 'rxjs';
 import {InvoiceDto} from '../../model/invoice/invoice.dto';
 import {ListResponse, SingleResponse} from '../../model/response.model';
 import {AppConstants} from '../../../app-constants';
+import {ClientDto} from '../../model/client/client-dto';
 
 
 @Injectable({
@@ -35,6 +36,10 @@ export class InvoiceApiService {
   generateInvoicePdf(invoiceId: number) {
     return this.http.get(AppConstants.API_ENDPOINT + '/invoices/pdf',
       { params: { invoiceId: invoiceId.toString()}, responseType: 'blob'});
+  }
+
+  updateInvoice(invoice: InvoiceDto): Observable<SingleResponse<InvoiceDto>> {
+    return this.http.put<SingleResponse<InvoiceDto>>(AppConstants.API_ENDPOINT + '/invoice/edit', invoice);
   }
 
   deleteInvoice(invoiceId: number): Observable<SingleResponse<Boolean>> {

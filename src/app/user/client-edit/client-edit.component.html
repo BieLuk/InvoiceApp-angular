@@ -1,8 +1,7 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col">
-      <div *ngIf="clientModel">
-        <div class="d-flex justify-content-between">
+        <div class="d-flex justify-content-between" *ngIf="clientModel">
           <h3><i class="fas fa-user-tie "></i> {{clientModel.name}}</h3>
         </div>
         <div class="card">
@@ -10,86 +9,88 @@
             <div class="row">
               <div class="col">
                 <form #clientForm="ngForm" (ngSubmit)="updateClient()">
-                  <div class="row">
-                    <div class="col pr-4">
-                      <div class="row">
-                        <div class="col-3">
-                          <p class="company-description-item"><label for="name">Nazwa firmy</label></p>
+                  <div *ngIf="clientModel">
+                    <div class="row">
+                      <div class="col pr-4">
+                        <div class="row">
+                          <div class="col-3">
+                            <p class="company-description-item"><label for="name">Nazwa firmy</label></p>
+                          </div>
+                          <div class="col">
+                            <textarea type="text" id="name" name="name" [(ngModel)]="clientModel.name" rows="2" required></textarea>
+                          </div>
                         </div>
-                        <div class="col">
-                          <textarea type="text" id="name" name="name" [(ngModel)]="clientModel.name" rows="2" required></textarea>
+                        <div class="row">
+                          <div class="col-3">
+                            <p class="company-description-item"><label for="street">Ulica</label></p>
+                          </div>
+                          <div class="col">
+                            <input type="text" class="form-control" id="street" name="street" [(ngModel)]="clientModel.street" required>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-3">
+                            <p class="company-description-item"><label for="postcode">Kod pocztowy</label></p>
+                          </div>
+                          <div class="col">
+                            <input type="text" class="form-control" id="postcode" name="postcode" [(ngModel)]="clientModel.postcode" required>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-3">
+                            <p class="company-description-item"><label for="city">Miejscowość</label></p>
+                          </div>
+                          <div class="col">
+                            <input type="text" class="form-control" id="city" name="city" [(ngModel)]="clientModel.city" required>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-3">
+                            <p class="company-description-item"><label for="city">NIP</label></p>
+                          </div>
+                          <div class="col">
+                            <input type="text" class="form-control" id="nip" name="nip" [(ngModel)]="clientModel.nip" required>
+                          </div>
                         </div>
                       </div>
-                      <div class="row">
-                        <div class="col-3">
-                          <p class="company-description-item"><label for="street">Ulica</label></p>
-                        </div>
-                        <div class="col">
-                          <input type="text" class="form-control" id="street" name="street" [(ngModel)]="clientModel.street" required>
-                        </div>
-                      </div>
-                      <div class="row">
-                        <div class="col-3">
-                          <p class="company-description-item"><label for="postcode">Kod pocztowy</label></p>
-                        </div>
-                        <div class="col">
-                          <input type="text" class="form-control" id="postcode" name="postcode" [(ngModel)]="clientModel.postcode" required>
-                        </div>
-                      </div>
-                      <div class="row">
-                        <div class="col-3">
-                          <p class="company-description-item"><label for="city">Miejscowość</label></p>
-                        </div>
-                        <div class="col">
-                          <input type="text" class="form-control" id="city" name="city" [(ngModel)]="clientModel.city" required>
-                        </div>
-                      </div>
-                      <div class="row">
-                        <div class="col-3">
-                          <p class="company-description-item"><label for="city">NIP</label></p>
-                        </div>
-                        <div class="col">
-                          <input type="text" class="form-control" id="nip" name="nip" [(ngModel)]="clientModel.nip" required>
-                        </div>
-                      </div>
-                    </div>
 
-                    <div class="col pl-4">
-                      <div class="row">
-                        <div class="col-3">
-                          <p class="company-description-item"><label for="phone">Numer telefonu</label></p>
+                      <div class="col pl-4">
+                        <div class="row">
+                          <div class="col-3">
+                            <p class="company-description-item"><label for="phone">Numer telefonu</label></p>
+                          </div>
+                          <div class="col">
+                            <input type="text" class="form-control" id="phone" name="phone" [(ngModel)]="clientModel.phone">
+                          </div>
                         </div>
-                        <div class="col">
-                          <input type="text" class="form-control" id="phone" name="phone" [(ngModel)]="clientModel.phone">
+                        <div class="row">
+                          <div class="col-3">
+                            <p class="company-description-item"><label for="email">Adres email</label></p>
+                          </div>
+                          <div class="col">
+                            <input type="email" class="form-control" id="email" name="email" [(ngModel)]="clientModel.email">
+                          </div>
                         </div>
-                      </div>
-                      <div class="row">
-                        <div class="col-3">
-                          <p class="company-description-item"><label for="email">Adres email</label></p>
+                        <div class="row">
+                          <div class="col-3">
+                            <p class="company-description-item"><label for="website">Strona internetowa</label></p>
+                          </div>
+                          <div class="col">
+                            <input type="text" class="form-control" id="website" name="website" [(ngModel)]="clientModel.website">
+                          </div>
                         </div>
-                        <div class="col">
-                          <input type="email" class="form-control" id="email" name="email" [(ngModel)]="clientModel.email">
+                        <div class="row">
+                          <div class="col-3">
+                            <p class="company-description-item"><label for="comment">Notatki</label></p>
+                          </div>
+                          <div class="col">
+                            <textarea type="text" id="comment" name="comment" [(ngModel)]="clientModel.comment"></textarea>
+                          </div>
                         </div>
-                      </div>
-                      <div class="row">
-                        <div class="col-3">
-                          <p class="company-description-item"><label for="website">Strona internetowa</label></p>
-                        </div>
-                        <div class="col">
-                          <input type="text" class="form-control" id="website" name="website" [(ngModel)]="clientModel.website">
-                        </div>
-                      </div>
-                      <div class="row">
-                        <div class="col-3">
-                          <p class="company-description-item"><label for="comment">Notatki</label></p>
-                        </div>
-                        <div class="col">
-                          <textarea type="text" id="comment" name="comment" [(ngModel)]="clientModel.comment"></textarea>
-                        </div>
-                      </div>
-                      <div class="row">
-                        <div class="col">
-                          <button type="submit" class="btn btn-info w-75 mt-2 float-right">ZAPISZ</button>
+                        <div class="row">
+                          <div class="col">
+                            <button type="submit" [disabled]="isSaveDisabled()" class="btn btn-info w-75 mt-2 float-right">ZAPISZ</button>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -99,7 +100,6 @@
             </div>
           </div>
         </div>
-      </div>
     </div>
   </div>
 </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {InvoiceDataApiService} from '../../shared/service/invoice-data/invoice-data-api.service';
 import {InvoiceDataMapperService} from '../../shared/service/invoice-data/invoice-data-mapper.service';
 import {ClientModel} from '../../shared/model/client/client.model';
@@ -9,6 +9,8 @@ import {ClientMapperService} from '../../shared/service/client/client-mapper.ser
 import {AuthApiService} from '../../shared/service/authentication/auth-api.service';
 import {UserMapperService} from '../../shared/service/user/user-mapper.service';
 import {UserApiService} from '../../shared/service/user/user-api.service';
+import {NgForm} from '@angular/forms';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-client-new',
@@ -17,6 +19,9 @@ import {UserApiService} from '../../shared/service/user/user-api.service';
 })
 export class ClientNewComponent implements OnInit {
 
+  @ViewChild('clientForm')
+  clientForm: NgForm;
+
   userId: number;
   client = this.initClientModel();
   searchNip: string;
@@ -24,7 +29,8 @@ export class ClientNewComponent implements OnInit {
   constructor(private invoiceDataApiService: InvoiceDataApiService, private invoiceDataMapperService: InvoiceDataMapperService,
               private clientApiService: ClientApiService, private clientMapperService: ClientMapperService,
               private authApiService: AuthApiService, private userApiService: UserApiService, private userMapperService: UserMapperService,
-              private route: ActivatedRoute, private router: Router) { }
+              private route: ActivatedRoute, private router: Router,
+              private toastr: ToastrService) { }
 
   ngOnInit() {
     this.userId = this.route.snapshot.queryParams['id'];
@@ -43,11 +49,9 @@ export class ClientNewComponent implements OnInit {
       .subscribe(
         () => {
           this.router.navigate(['user/clients']);
-          console.log('ZAPISANO'); // TODO toastr o zapisaniu
+          this.toastr.success('Klient został zapisany', 'Sukces');
         }
       );
-    console.log(this.client);
-
   }
 
   private initClientModel(): ClientModel {
@@ -65,6 +69,11 @@ export class ClientNewComponent implements OnInit {
       user: undefined
     };
   }
+
+  isSaveDisabled(): boolean {
+    return this.clientForm.form.invalid;
+  }
+
 
 
 

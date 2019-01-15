@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
 import {ClientApiService} from '../../shared/service/client/client-api.service';
 import {ClientMapperService} from '../../shared/service/client/client-mapper.service';
 import {map} from 'rxjs/operators';
 import {ClientModel} from '../../shared/model/client/client.model';
+import {NgForm} from '@angular/forms';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-client-edit',
@@ -12,12 +14,17 @@ import {ClientModel} from '../../shared/model/client/client.model';
 })
 export class ClientEditComponent implements OnInit {
 
+  @ViewChild('clientForm')
+  clientForm: NgForm;
+
   clientId: number;
   clientModel: ClientModel;
 
   constructor(private route: ActivatedRoute,
               private clientApiService: ClientApiService,
-              private clientMapperService: ClientMapperService) { }
+              private clientMapperService: ClientMapperService,
+              private router: Router,
+              private toastr: ToastrService) { }
 
   ngOnInit() {
     this.clientId = this.route.snapshot.queryParams['id'];
@@ -36,9 +43,14 @@ export class ClientEditComponent implements OnInit {
     this.clientApiService.updateClient(this.clientMapperService.mapModelToDto(this.clientModel))
       .subscribe(
         () => {
-          this.loadClientDetails();
+          this.router.navigate(['user/clients']);
+          this.toastr.success('Klient został zaktualizowany', 'Sukces');
         }
       );
+  }
+
+  isSaveDisabled(): boolean {
+    return this.clientForm.form.invalid;
   }
 
 }

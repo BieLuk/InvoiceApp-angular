@@ -11,6 +11,8 @@ import {RouterModule} from '@angular/router';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {JwtInterceptor} from './shared/helpers/JwtInterceptor';
 import {ErrorInterceptor} from './shared/helpers/ErrorInterceptor';
+import {ToastrModule} from 'ngx-toastr';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -23,6 +25,10 @@ import {ErrorInterceptor} from './shared/helpers/ErrorInterceptor';
     SharedModule,
     UserModule,
     AdminModule,
+    ToastrModule.forRoot({
+      positionClass: 'toast-bottom-right'
+    }),
+    BrowserAnimationsModule,
     RouterModule.forRoot(routes, {paramsInheritanceStrategy: 'always'})
   ],
   providers: [

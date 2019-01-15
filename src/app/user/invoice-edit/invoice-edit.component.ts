@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {InvoiceModel} from '../../shared/model/invoice/invoice.model';
 import {map} from 'rxjs/operators';
 import {ClientApiService} from '../../shared/service/client/client-api.service';
@@ -15,29 +15,28 @@ import {VatTypeApiService} from '../../shared/service/vat-type/vat-type-api.serv
 import {VatTypeMapperService} from '../../shared/service/vat-type/vat-type-mapper.service';
 import {InvoiceApiService} from '../../shared/service/invoice/invoice-api.service';
 import {InvoiceMapperService} from '../../shared/service/invoice/invoice-mapper.service';
-import {InvoiceTypeModel} from '../../shared/model/invoice/invoice-type.model';
 import {AuthApiService} from '../../shared/service/authentication/auth-api.service';
 import {PolishDatepickerParserFormatter} from '../../shared/datepicker/PolishDatepickerParserFormatter';
 import {InvoiceVatModel} from '../../shared/model/invoice/invoice-vat.model';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
 
 
 @Component({
-  selector: 'app-invoice-new',
-  templateUrl: './invoice-new.component.html',
-  styleUrls: ['./invoice-new.component.css'],
+  selector: 'app-invoice-edit',
+  templateUrl: './invoice-edit.component.html',
+  styleUrls: ['./invoice-edit.component.css'],
   providers: [{provide: NgbDatepickerI18n, useClass: PolishDatepickerI18n},
     {provide: NgbDateParserFormatter, useClass: PolishDatepickerParserFormatter}]
 
 })
-export class InvoiceNewComponent implements OnInit {
+export class InvoiceEditComponent implements OnInit {
 
   editInvoiceNumberMode = false;
   userId: number;
+  invoiceId: number;
 
-  invoice = this.initInvoiceModel();
-  invoices: InvoiceModel[];
+  invoice: InvoiceModel;
 
   clients: ClientModel[];
   paymentTypes: PaymentTypeModel[];
@@ -61,14 +60,13 @@ export class InvoiceNewComponent implements OnInit {
               private invoiceMapperService: InvoiceMapperService,
               private authApiService: AuthApiService,
               private router: Router,
+              private route: ActivatedRoute,
               private toastr: ToastrService) { }
 
   ngOnInit() {
     this.userId = this.authApiService.currentUserId;
-    this.calculateInvoiceNumber();
-    this.loadClients();
-    this.loadPaymentTypes();
-    this.loadVatTypes();
+    this.invoiceId = this.route.snapshot.queryParams['id'];
+    this.loadInvoice();
   }
 
   changeEditInvoiceNumberMode() {
@@ -76,25 +74,46 @@ export class InvoiceNewComponent implements OnInit {
   }
 
   saveInvoice() {
-    this.invoice.user = this.authApiService.currentUserValue.userDTO;
     this.invoice.invoicePositions = this.invoicePositions;
     this.invoice.invoiceVats = this.invoiceVats;
-    this.invoiceApiService.createInvoice(this.invoiceMapperService.mapModelToDto(this.invoice))
+    this.invoiceApiService.updateInvoice(this.invoiceMapperService.mapModelToDto(this.invoice))
       .subscribe(
         () => {
-          this.router.navigate(['user', 'invoices']);
-          this.toastr.success('Faktura została zapisana', 'Sukces');
+          this.router.navigate(['user', 'invoice', 'details'], { queryParams: { id: this.invoiceId }});
+          this.toastr.success('Faktura została zaktualizowana', 'Sukces');
         },
         () => this.toastr.error('Wystąpił błąd przy zapisie faktury', 'Błąd')
-  );
+      );
+  }
+
+  private loadInvoice() {
+    this.invoiceApiService.getInvoiceDetailsById(this.invoiceId).pipe(
+      map(response => response.data),
+      map(invoiceDto => this.invoiceMapperService.mapDtoToModel(invoiceDto))
+    ).subscribe(invoice => {
+      this.invoice = invoice;
+      this.invoicePositions = invoice.invoicePositions;
+      this.invoiceVats = invoice.invoiceVats;
+      this.createDateInvoice = this.parser.parse(invoice.createDate);
+      this.saleDateInvoice = this.parser.parse(invoice.saleDate);
+      this.paymentDateInvoice = this.parser.parse(invoice.paymentDate);
+
+      this.loadClients();
+      this.loadPaymentTypes();
+      this.loadVatTypes();
+    });
   }
 
   private loadClients() {
-    this.clientApiService.getClientsByUserId(this.userId).pipe(
+    this.clientApiService.getClientsByUserId(1).pipe(
       map(response => response.data),
       map(clientsDto => clientsDto
         .map(clientDto => this.clientMapperService.mapDtoToModel(clientDto)))
-    ).subscribe(clients => this.clients = clients);
+    ).subscribe(clients => {
+      this.clients = clients;
+      this.invoice.client = this.clients.find(client => client.id === this.invoice.client.id);
+      }
+    );
   }
 
   private loadPaymentTypes() {
@@ -102,7 +121,10 @@ export class InvoiceNewComponent implements OnInit {
       map(response => response.data),
       map(paymentTypesDto => paymentTypesDto
         .map(paymentTypeDto => this.paymentTypeMapperService.mapDtoToModel(paymentTypeDto)))
-    ).subscribe(paymentTypes => this.paymentTypes = paymentTypes);
+    ).subscribe(paymentTypes => {
+      this.paymentTypes = paymentTypes;
+      this.invoice.paymentType = this.paymentTypes.find(paymentType => paymentType.id === this.invoice.paymentType.id);
+    });
   }
 
   private loadVatTypes() {
@@ -112,7 +134,12 @@ export class InvoiceNewComponent implements OnInit {
         .map(vatTypeDto => this.vatTypeMapperService.mapDtoToModel(vatTypeDto)))
     ).subscribe(vatTypes => {
       this.vatTypes = vatTypes;
-      this.invoicePositions.push(this.initInvoicePositionModel());
+      // this.invoicePositions.push(this.initInvoicePositionModel());
+
+      this.invoice.invoicePositions.forEach(position => {
+        position.vatType = this.vatTypes.find(vatType => vatType.id === position.vatType.id);
+      });
+
     });
   }
 
@@ -215,46 +242,17 @@ export class InvoiceNewComponent implements OnInit {
     };
   }
 
-
-  private initInvoiceTypeModel(): InvoiceTypeModel {
-    return {
-      id: 1,
-      name: 'Faktura'
-    };
-  }
-
-
-  private initInvoiceModel(): InvoiceModel {
-    return {
-      id: undefined,
-      invoiceNumber: '',
-      user: undefined,
-      createDate: '',
-      saleDate: '',
-      paymentDate: '',
-      netAmount: 0,
-      grossAmount: 0,
-      vatAmount: 0,
-      paymentType: undefined,
-      invoiceVersion: this.initInvoiceTypeModel(),
-      client: undefined,
-      invoicePositions: undefined,
-      invoiceVats: undefined
-    };
-  }
-
-
   private initInvoicePositionModel(): InvoicePositionModel {
     return {
       id: undefined,
-      name: '',
-      unit: '',
+      name: undefined,
+      unit: undefined,
       quantity: 1,
       netPrice: 0,
       netValue: 0,
       grossValue: 0,
       vatType: this.vatTypes[0],
-      vatValue: 0
+      vatValue: undefined
     };
   }
 
@@ -270,35 +268,8 @@ export class InvoiceNewComponent implements OnInit {
     this.invoice.paymentDate = this.parser.format(date);
   }
 
-  calculateInvoiceNumber(): void {
-    const currentDate = new Date();
-    let currentMonth: string;
-    if (currentDate.getMonth() < 9) {
-      currentMonth = '0' + (currentDate.getMonth() + 1).toString();
-    } else {
-      currentMonth = (currentDate.getMonth() + 1).toString();
-    }
-    const currentYear =  currentDate.getFullYear().toString();
-    let invoiceNo = 0;
-    this.invoiceApiService.getInvoicesByUserId(this.userId).pipe(
-      map(response => response.data),
-      map(invoicesDto => invoicesDto
-        .map(invoiceDto => this.invoiceMapperService.mapDtoToModel(invoiceDto)))
-    ).subscribe(invoices => {
-      this.invoices = invoices;
-      this.invoices.forEach(invoice => {
-        const invoiceMonth = invoice.createDate.substr(3, 2);
-        const invoiceYear = invoice.createDate.substr(6, 4);
-       if (invoiceMonth === currentMonth && invoiceYear === currentYear) {
-         invoiceNo++;
-       }
-      });
-      if (invoiceNo !== 0) {
-        this.invoice.invoiceNumber = (invoiceNo + 1).toString() + '/' + currentMonth + '/' + currentYear;
-      } else {
-        this.invoice.invoiceNumber = '1/' + currentMonth + '/' + currentYear;
-      }
-    });
+  navigateToInvoiceDetails() {
+    this.router.navigate(['user', 'invoices', 'details'], { queryParams: { id: this.invoiceId }});
   }
 
   isSaveDisabled(): boolean {

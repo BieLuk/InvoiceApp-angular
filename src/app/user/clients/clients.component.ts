@@ -5,6 +5,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {map} from 'rxjs/operators';
 import {ClientMapperService} from '../../shared/service/client/client-mapper.service';
 import {AuthApiService} from '../../shared/service/authentication/auth-api.service';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-client',
@@ -20,7 +21,8 @@ export class ClientsComponent implements OnInit {
   constructor(private clientApiService: ClientApiService,
               private clientMapperService: ClientMapperService,
               private authApiService: AuthApiService,
-              private router: Router) { }
+              private router: Router,
+              private toastr: ToastrService) { }
 
   ngOnInit() {
     this.userId = this.authApiService.currentUserId;
@@ -82,8 +84,10 @@ export class ClientsComponent implements OnInit {
     this.clientApiService.deleteClient(clientId).pipe(
       map(response => response.data)
     ).subscribe(
-      () => this.loadClients()
-      );
+      () => {
+        this.loadClients();
+        this.toastr.success('Uzytkownik został usunięty', 'Sukces');
+      });
   }
 
 }

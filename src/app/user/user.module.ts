@@ -15,7 +15,8 @@ import { InvoicesComponent } from './invoices/invoices.component';
 import { InvoiceNewComponent } from './invoice-new/invoice-new.component';
 import {DatepickerModule} from 'ngx-bootstrap';
 import { NgSelectModule } from '@ng-select/ng-select';
-import { InvoiceDetailsComponent } from '../shared/component/invoice-details/invoice-details.component';
+import { InvoiceDetailsComponent } from './invoice-details/invoice-details.component';
+import { InvoiceEditComponent } from './invoice-edit/invoice-edit.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { InvoiceDetailsComponent } from '../shared/component/invoice-details/inv
     InvoicesComponent,
     InvoiceNewComponent,
     InvoiceDetailsComponent,
+    InvoiceEditComponent,
 
   ],
   exports: [

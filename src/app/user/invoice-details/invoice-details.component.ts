@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {InvoiceApiService} from '../../service/invoice/invoice-api.service';
-import {InvoiceMapperService} from '../../service/invoice/invoice-mapper.service';
+import {InvoiceApiService} from '../../shared/service/invoice/invoice-api.service';
+import {InvoiceMapperService} from '../../shared/service/invoice/invoice-mapper.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {map} from 'rxjs/operators';
-import {InvoiceModel} from '../../model/invoice/invoice.model';
+import {InvoiceModel} from '../../shared/model/invoice/invoice.model';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-invoice-details',
@@ -18,7 +19,8 @@ export class InvoiceDetailsComponent implements OnInit {
   constructor(private route: ActivatedRoute,
               private invoiceApiService: InvoiceApiService,
               private invoiceMapperService: InvoiceMapperService,
-              private router: Router) { }
+              private router: Router,
+              private toastr: ToastrService) { }
 
   ngOnInit() {
     this.invoiceId = this.route.snapshot.queryParams['id'];
@@ -36,7 +38,10 @@ export class InvoiceDetailsComponent implements OnInit {
     this.invoiceApiService.deleteInvoice(this.invoiceId).pipe(
       map(response => response.data)
     ).subscribe(
-      () => this.router.navigate(['user/invoices'])
+      () => {
+        this.router.navigate(['user/invoices']);
+        this.toastr.success('Faktura została usunięta', 'Sukces');
+      }
     );
   }
 
@@ -58,5 +63,9 @@ export class InvoiceDetailsComponent implements OnInit {
           document.body.removeChild(link);
       }
     });
+  }
+
+  navigateToInvoiceEdit() {
+    this.router.navigate(['user', 'invoices', 'edit'], {queryParams: { id: this.invoiceId}});
   }
 }

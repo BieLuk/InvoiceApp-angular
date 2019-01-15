@@ -1,0 +1,65 @@
+.invoice-description-item {
+  font-size: 13px;
+  color: #607d8b;
+  text-align: right;
+  margin-top: 9px;
+  margin-bottom: 29px;
+}
+
+.invoice-item {
+  font-size: 20px;
+}
+
+input:hover, input:focus {
+  font-size: 21px;
+  background-color: #FFFFFF;
+}
+
+input {
+  width: 100%;
+}
+
+.form-control {
+  outline: none;
+  box-shadow:none !important;
+}
+
+.form-control:hover, .form-control:focus {
+  font-size: 17px;
+  padding-left: 8px;
+}
+
+.container-fluid {
+  width: 65%;
+}
+
+.change-btn {
+  color: #039be5;
+  background-color: #FFFFFF;
+  position: relative;
+}
+
+.change-btn:after{
+  content: '';
+  position: absolute;
+  width: 0; height: 4px;
+  display: block;
+  margin-top: 5px;
+  right: 0;
+  background: #039be5;
+  transition: width .3s ease;
+  -webkit-transition: width .3s ease;
+}
+
+.change-btn:hover:after{
+  width: 100%;
+  left: 0;
+  background: #039be5;
+}
+
+.change-btn:focus, .edit-btn:active{
+  outline: none;
+  box-shadow: none;
+}
+
+

@@ -1,12 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {UserModel, UserSimpleModel} from '../../shared/model/user/user.model';
 import {UserApiService} from '../../shared/service/user/user-api.service';
 import {UserMapperService} from '../../shared/service/user/user-mapper.service';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {map} from 'rxjs/operators';
 import {Subscription} from 'rxjs';
 import {AuthApiService} from '../../shared/service/authentication/auth-api.service';
 import {AuthMapperService} from '../../shared/service/authentication/auth-mapper.service';
+import {ToastrService} from 'ngx-toastr';
+import {NgForm} from '@angular/forms';
 
 @Component({
   selector: 'app-user-settings-company',
@@ -15,6 +17,9 @@ import {AuthMapperService} from '../../shared/service/authentication/auth-mapper
 })
 export class UserSettingsComponent implements OnInit {
 
+  @ViewChild('userForm')
+  userForm: NgForm;
+
   editUserMode = false;
 
   userId: number;
@@ -22,7 +27,9 @@ export class UserSettingsComponent implements OnInit {
 
   constructor(private userApiService: UserApiService,
               private userMapperService: UserMapperService,
-              private authApiService: AuthApiService) {
+              private authApiService: AuthApiService,
+              private router: Router,
+              private toastr: ToastrService) {
   }
 
   ngOnInit() {
@@ -48,8 +55,13 @@ export class UserSettingsComponent implements OnInit {
         () => {
           this.editUserMode = false;
           this.loadUserModel();
+          this.toastr.success('Uzytkownik został zapisany', 'Sukces');
         }
       );
+  }
+
+  isSaveDisabled(): boolean {
+    return this.userForm.form.invalid;
   }
 
 

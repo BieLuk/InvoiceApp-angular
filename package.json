@@ -48,6 +48,7 @@
     "jspdf-autotable": "^3.0.2",
     "localdate": "^3.0.2",
     "ngx-bootstrap": "^3.1.1",
+    "ngx-toastr": "^9.1.1",
     "popper.js": "^1.14.4",
     "rxjs": "~6.3.3",
     "zone.js": "~0.8.26"
