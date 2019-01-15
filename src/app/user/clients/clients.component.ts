@@ -67,7 +67,6 @@ export class ClientsComponent implements OnInit {
 
   }
 
-  // TODO zmienić na this.userId
   private loadClients() {
     this.clientApiService.getClientsByUserId(this.userId).pipe(
       map(response => response.data),

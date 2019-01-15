@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
 import {AuthApiService} from '../../service/authentication/auth-api.service';
 import {UserApiService} from '../../service/user/user-api.service';
@@ -7,6 +7,7 @@ import {first} from 'rxjs/operators';
 import {UserSignUpModel} from '../../model/user/user.model';
 import {UserMapperService} from '../../service/user/user-mapper.service';
 import {AuthMapperService} from '../../service/authentication/auth-mapper.service';
+import {NgForm} from '@angular/forms';
 
 @Component({
   selector: 'app-register',
@@ -14,6 +15,10 @@ import {AuthMapperService} from '../../service/authentication/auth-mapper.servic
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
+
+  @ViewChild('registerForm')
+  registerForm: NgForm;
+
   loading = false;
   submitted = false;
   userSignUpModel = this.initUserSignUpModel();
@@ -26,32 +31,16 @@ export class RegisterComponent implements OnInit {
     private authMapperService: AuthMapperService,
     private alertService: AlertApiService
   ) {
-    // redirect to home if already logged in
     if (this.authApiService.currentUserValue) {
       this.router.navigate(['/']);
     }
   }
 
   ngOnInit() {
-    // this.registerForm = this.formBuilder.group({
-    //   firstName: ['', Validators.required],
-    //   lastName: ['', Validators.required],
-    //   username: ['', Validators.required],
-    //   password: ['', [Validators.required, Validators.minLength(6)]]
-    // });
   }
-
-  // convenience getter for easy access to form fields
-  // get f() { return this.registerForm.controls; }
 
   onSubmit() {
     this.submitted = true;
-
-    // stop here if form is invalid
-    // if (this.registerForm.invalid) {
-    //   return;
-    // }
-    // TODO WALIDACJA
 
     if (this.userSignUpModel.password === this.repeatPassword) {
 
@@ -70,6 +59,10 @@ export class RegisterComponent implements OnInit {
     } else {
       console.log('hasła są różne');
     }
+  }
+
+  isSaveDisabled(): boolean {
+    return this.registerForm.form.invalid;
   }
 
   initUserSignUpModel(): UserSignUpModel {

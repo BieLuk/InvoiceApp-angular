@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup, NgForm, Validators} from '@angular/forms';
 import {AuthApiService} from '../../service/authentication/auth-api.service';
 import {AlertApiService} from '../../service/alert/alert-api.service';
 import {UserLoginModel} from '../../model/user/user.model';
@@ -13,6 +13,10 @@ import {AuthMapperService} from '../../service/authentication/auth-mapper.servic
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+
+  @ViewChild('loginForm')
+  loginForm: NgForm;
+
   loading = false;
   submitted = false;
   returnUrl: string;
@@ -50,6 +54,10 @@ export class LoginComponent implements OnInit {
           this.alertService.error(error);
           this.loading = false;
         });
+  }
+
+  isSaveDisabled(): boolean {
+    return this.loginForm.form.invalid;
   }
 
 
