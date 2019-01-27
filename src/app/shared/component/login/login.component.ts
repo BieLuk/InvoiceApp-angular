@@ -6,6 +6,7 @@ import {AlertApiService} from '../../service/alert/alert-api.service';
 import {UserLoginModel} from '../../model/user/user.model';
 import {first} from 'rxjs/operators';
 import {AuthMapperService} from '../../service/authentication/auth-mapper.service';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +19,6 @@ export class LoginComponent implements OnInit {
   loginForm: NgForm;
 
   loading = false;
-  submitted = false;
   returnUrl: string;
   userLoginModel = this.initUserLoginModel();
 
@@ -28,7 +28,8 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private authenticationService: AuthApiService,
     private alertService: AlertApiService,
-    private authMapperService: AuthMapperService
+    private authMapperService: AuthMapperService,
+    private toastr: ToastrService
   ) {
     if (this.authenticationService.currentUserValue) {
       this.router.navigate(['']);
@@ -40,18 +41,15 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    this.submitted = true;
-
     this.loading = true;
     this.authenticationService.login(this.authMapperService.mapLoginModelToLoginDto(this.userLoginModel))
       .pipe(first())
       .subscribe(
-        data => {
+        () => {
           this.router.navigate([this.returnUrl]);
         },
-        error => {
-          console.log('error:' + error);
-          this.alertService.error(error);
+        () => {
+          this.toastr.error('Podano niepoprawne dane', 'Błąd logowania');
           this.loading = false;
         });
   }

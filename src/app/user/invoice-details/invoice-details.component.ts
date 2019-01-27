@@ -5,6 +5,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {map} from 'rxjs/operators';
 import {InvoiceModel} from '../../shared/model/invoice/invoice.model';
 import {ToastrService} from 'ngx-toastr';
+import {AuthApiService} from '../../shared/service/authentication/auth-api.service';
 
 @Component({
   selector: 'app-invoice-details',
@@ -16,13 +17,17 @@ export class InvoiceDetailsComponent implements OnInit {
   invoiceId: number;
   invoice: InvoiceModel;
 
+  currentUserRole: string;
+
   constructor(private route: ActivatedRoute,
               private invoiceApiService: InvoiceApiService,
               private invoiceMapperService: InvoiceMapperService,
               private router: Router,
-              private toastr: ToastrService) { }
+              private toastr: ToastrService,
+              private authApiService: AuthApiService) { }
 
   ngOnInit() {
+    this.currentUserRole = this.authApiService.currentUserRole;
     this.invoiceId = this.route.snapshot.queryParams['id'];
     this.loadInvoiceDetails();
   }

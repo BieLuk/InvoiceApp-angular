@@ -39,7 +39,7 @@ export class InvoiceApiService {
   }
 
   updateInvoice(invoice: InvoiceDto): Observable<SingleResponse<InvoiceDto>> {
-    return this.http.put<SingleResponse<InvoiceDto>>(AppConstants.API_ENDPOINT + '/invoice/edit', invoice);
+    return this.http.put<SingleResponse<InvoiceDto>>(AppConstants.API_ENDPOINT + '/invoices/edit', invoice);
   }
 
   deleteInvoice(invoiceId: number): Observable<SingleResponse<Boolean>> {

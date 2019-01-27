@@ -28,7 +28,7 @@ export class AuthApiService {
     return this.http.post(AppConstants.API_ENDPOINT + '/auth/signup', user);
   }
 
-  login(userLoginDto: UserLoginDto) {
+  login(userLoginDto: UserLoginDto): Observable<JwtAuthenticationResponse> {
     return this.http.post<JwtAuthenticationResponse>(AppConstants.API_ENDPOINT + '/auth/signin', userLoginDto)
       .pipe(map(data => {
         if (data && data.accessToken) {

@@ -171,30 +171,35 @@ export class InvoiceNewComponent implements OnInit {
       if (this.invoiceVats.length !== 0) {
         for (const vat of this.invoiceVats) {
           if (vat.vatType === position.vatType) {
-            vat.netValue = Number((+vat.netValue + +position.netValue).toFixed(2));
-            vat.vatValue = Number((+vat.vatValue + +position.vatValue).toFixed(2));
-            vat.grossValue = Number((+vat.grossValue + +position.grossValue).toFixed(2));
+            this.calculateInvoicePosition(vat, position);
             vatTypeFounded = true;
             break;
           }
         }
         if (vatTypeFounded !== true) {
-          const invoiceVatElem: InvoiceVatModel = this.initInvoiceVatModel();
-          invoiceVatElem.netValue = position.netValue;
-          invoiceVatElem.vatType = position.vatType;
-          invoiceVatElem.grossValue = position.grossValue;
-          invoiceVatElem.vatValue = position.vatValue;
+          const invoiceVatElem = this.setInvoicePosition(position);
           this.invoiceVats.push(invoiceVatElem);
         }
       } else {
-        const invoiceVatElem: InvoiceVatModel = this.initInvoiceVatModel();
-        invoiceVatElem.netValue = position.netValue;
-        invoiceVatElem.vatType = position.vatType;
-        invoiceVatElem.grossValue = position.grossValue;
-        invoiceVatElem.vatValue = position.vatValue;
+        const invoiceVatElem = this.setInvoicePosition(position);
         this.invoiceVats.push(invoiceVatElem);
       }
     }
+  }
+
+  private calculateInvoicePosition(vat: InvoiceVatModel, position: InvoicePositionModel) {
+    vat.netValue = Number((+vat.netValue + +position.netValue).toFixed(2));
+    vat.vatValue = Number((+vat.vatValue + +position.vatValue).toFixed(2));
+    vat.grossValue = Number((+vat.grossValue + +position.grossValue).toFixed(2));
+  }
+
+  private setInvoicePosition(position: InvoicePositionModel) {
+    const invoiceVatElem: InvoiceVatModel = this.initInvoiceVatModel();
+    invoiceVatElem.netValue = position.netValue;
+    invoiceVatElem.vatType = position.vatType;
+    invoiceVatElem.grossValue = position.grossValue;
+    invoiceVatElem.vatValue = position.vatValue;
+    return invoiceVatElem;
   }
 
   private initVatTypeModel(): VatTypeModel {

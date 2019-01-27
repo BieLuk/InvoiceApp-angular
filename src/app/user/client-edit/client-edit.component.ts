@@ -45,7 +45,9 @@ export class ClientEditComponent implements OnInit {
         () => {
           this.router.navigate(['user/clients']);
           this.toastr.success('Klient został zaktualizowany', 'Sukces');
-        }
+        },
+        () => this.toastr.error('Wystąpił błąd przy zapisie klienta', 'Błąd')
+
       );
   }
 
